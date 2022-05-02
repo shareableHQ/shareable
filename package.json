@@ -1,0 +1,22 @@
+{
+  "name": "shareable",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "package": "svelte-kit package",
+    "preview": "svelte-kit preview",
+    "prepare": "svelte-kit sync"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "next",
+    "@sveltejs/kit": "next",
+    "svelte": "^3.44.0"
+  },
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^1.35.2",
+    "feather-icons": "^4.29.0",
+    "svelte-modals": "^1.1.0"
+  }
+}
