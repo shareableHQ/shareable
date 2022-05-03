@@ -1,41 +1,24 @@
 <script>
    import { goto } from "$app/navigation";
+   goto('/')
+</script>
+
+<!-- <script>
+   import { goto } from "$app/navigation";
    import supabase from "$lib/db";
    import { user } from "$lib/stores";
    import { openModal } from 'svelte-modals'
    import Modal from '../components/Modal.svelte';
    import { setUsername } from '$lib/functions/userActions.js'
- 
+
    let email, password, username;
    let isNewRegistration = false;
- 
-   const signUp = async () => {
-      let { user: userDetails, error } = await supabase.auth.signUp({
-         email: email,
-         password: password,
-      },{
-         data:{
-            username:username
-         }
-      });
-      if(error){
-         openModal(Modal, { title: "Something went wrong!", message: error.message })
-         email = null
-         password = null
-      }else{
-         await setUsername(userDetails.user_metadata.username, userDetails.id)
-         console.log(userDetails.user_metadata)
-         $user = userDetails;
-         if(!error){
-            goto('/')
-         }
-      }
-   };
- 
+
    const logIn = async () => {
       let { user: userDetails, error } = await supabase.auth.signIn({
-         email: email,
-         password: password,
+         // email: email,
+         // password: password,
+         provider:'github'
       });
       if(error){
          openModal(Modal, { title: "Something went wrong!", message: error.message })
@@ -78,4 +61,4 @@
       text-decoration: none;
       color: unset;
    }
-</style>
+</style> -->

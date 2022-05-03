@@ -1,10 +1,17 @@
 <script>
   import '$lib/style/main.css'
-  import { user } from "$lib/stores";
+  import { user, token } from "$lib/stores";
   import { Modals, closeModal } from 'svelte-modals'
   import Navbar from '../components/Navbar.svelte';
   import Sidebar from '../components/Sidebar.svelte';
+  import supabase from "$lib/db";
   $: console.log($user);
+  supabase.auth.onAuthStateChange((event, session) => {
+    if(event == 'SIGNED_IN'){
+      $user = session.user
+      $token = session.provider_token
+    }
+  })
 </script>
 
 <Sidebar />

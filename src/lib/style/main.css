@@ -12,6 +12,12 @@ body{
 .brand{
    color:#FF2D55;
 }
+.status{
+   border:0.5px #FF2D55 solid;
+   padding: 2px 7px;
+   border-radius: 15px;
+   background-color: #FF2D551a;
+}
 
 /* BUTTONS */
 .button{
@@ -29,7 +35,7 @@ body{
    border-radius: 4px;
    text-decoration: none;
    color: unset;
-   font-size: 14px;
+   font-size: 15px;
 }
 .button:hover{
 	background-color: #404040;
