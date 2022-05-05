@@ -9,7 +9,6 @@
    const logOut = async () => {
       let { error } = await supabase.auth.signOut();
       $user = false;
-      goto("/login");
    };
    function openMenu(){
       if($sidebar){

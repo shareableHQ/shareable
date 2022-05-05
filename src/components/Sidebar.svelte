@@ -20,7 +20,7 @@
       <div class="headerLinks">
          <a on:click={closeSidebar} class="icon" href="/">{@html feather.icons.home.toSvg()} Home</a>
          {#if $user.email}
-            <a on:click={closeSidebar} class="icon" href="/settings">{@html feather.icons.settings.toSvg()} Settings</a>
+            <a on:click={closeSidebar} class="icon" href="/import">{@html feather.icons['plus-circle'].toSvg()} Publish from GitHub</a>
          {/if}
        </div>
 
