@@ -9,6 +9,7 @@
    }
    function closeSidebar(){
       sidebar.set(false)
+      document.getElementsByTagName('body')[0].style.overflow = 'unset'
    }
 </script>
 

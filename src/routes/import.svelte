@@ -86,6 +86,10 @@
    }
 </script>
 
+<svelte:head>
+   <title>Shareable | Publish</title>
+</svelte:head>
+
 {#if id}
    <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
    <div id="page">

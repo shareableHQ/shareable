@@ -1,12 +1,105 @@
 <script context="module">
+   import supabase from '$lib/db';
    export async function load({params}){
       const id = params.id
-      return {props: {id}}
+      const { data, error } = await supabase.from('scripts').select('*').eq('id', id)
+      let script = data[0]
+
+      let fileReq = await fetch(script.download_url)
+      let file = await fileReq.text()
+      
+      return {props: {id, script, file}}
    }
 </script>
 
 <script>
+   import feather from 'feather-icons';
    export let id;
+   export let script;
+   export let file;
+   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+   let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
+
+   async function registerDownload(){
+      const { data, error } = await supabase.rpc('increment', { row_id:id })
+   }
 </script>
 
-<h1>{id}</h1>
+<svelte:head>
+   <title>Shareable | {script.name}</title>
+</svelte:head>
+
+{#if script}
+   <div class="script_page">
+      <h1>{script.name}</h1>
+      <h2 class="author">Created by <span id="author_name">{script.author_name}</span></h2>
+      <br>
+      <a href={link} on:click={registerDownload} class="icon download scriptToolButton" download={script.repo.filename.split('.')[0]}>{@html feather.icons['arrow-down'].toSvg()} Download</a><br>
+
+      <div id="buttonsBar">
+         <a href='' class="icon review scriptToolButton">{@html feather.icons['message-square'].toSvg()} Review</a>
+         <a href='' class="icon star scriptToolButton" >{@html feather.icons['star'].toSvg()} Star</a>
+         <a href='' class="icon report scriptToolButton">{@html feather.icons['alert-triangle'].toSvg()} Report</a>
+      </div>
+
+      <div class="info">
+         
+         <div class="info_child">
+            <h2>Informations</h2>
+            <p><span class="info-title">Author:</span> {script.author_name}</p>
+            <p><span class="info-title">Downloads:</span> {script.downloads}</p>
+            <p><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
+         </div>
+                 
+         <div class="info_child">
+            <h2>Description</h2>
+            {#if script.desc}
+               <p>{script.desc}</p>
+            {:else}
+               <p>No description provided!</p>
+            {/if}
+         </div>
+
+      </div>
+
+      <div class="info_child">
+         <h2>Reviews</h2>
+         <p style="text-align:center; opacity:0.6; padding-top:60px">Coming soon!</p>
+      </div>      
+   </div>
+{:else}
+   <p class="not_found">We found nothing here!</p>
+{/if}
+   
+
+
+<style>
+   #buttonsBar{
+      margin-top: 25px;
+      margin-bottom:40px
+   }
+   .info{
+      display: grid;
+      grid-template-columns: 30% 70%;
+      padding-left: 5px;
+      padding-right: 15px;
+      margin-top:50px
+   }
+   .info_child{
+      text-align: left;
+   }
+   .info-title{
+      color:#aaa
+   }
+   .script_page{
+      text-align: center;
+   }
+   .author{
+      font-weight: 400;
+      margin-top: -20px;
+      font-size: 21px;
+   }
+   #author_name{
+      color:#a1c4fd;
+   }
+</style>

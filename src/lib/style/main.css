@@ -4,13 +4,16 @@ body{
 	color: #ffffff;
    padding-left:10px;
 }
+.not_found{
+   opacity: 0.7;
+   text-align: center;
+   padding-top: 30vh;
+   font-size: 25px;
+}
 .loader{
    display: flex;
    justify-content: center;
    padding-top: 250px;
-}
-.notification-content{
-   z-index: 4;
 }
 textarea{
    resize: none;
@@ -60,8 +63,28 @@ textarea{
    color:white;
    background-color: #404040;
 }
-.redBrandButton{
+.redBrandButton, .download{
    background-color: #FF2D55;
+}
+.star{
+   background-color: #FFE677;
+   color: #404040 !important;
+
+}
+.review{
+   background-color: #90EE90;
+   color: #404040 !important;
+}
+.report{
+   background-color: #FF8F33;
+}
+.scriptToolButton{
+   padding:8px 15px;
+   border: 0px;
+   border-radius: 4px;
+   text-decoration: none;
+   color: white;
+   font-size: 15px;
 }
 
 /* NAVBAR */
@@ -142,6 +165,10 @@ input, textarea{
    .description-editor{
       flex-direction: column;
       gap: 0px;
+   }
+   .info{
+      grid-template-columns: repeat(1, 100%) !important;
+      gap:50px
    }
 }
 
