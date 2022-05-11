@@ -4,6 +4,23 @@ body{
 	color: #ffffff;
    padding-left:10px;
 }
+/* Style for the select component */
+.themed{
+   --itemHoverBG:#FF2D551a;
+   --itemIsActiveBG:#FF2D55;
+   --background:#333333;
+   --listBackground:#333333;
+   --borderRadius:4px;
+   --border:0px;
+   --inputColor:white;
+   --height:30px;
+   --clearSelectTop:7px;
+   --clearSelectColor:white;
+   --clearSelectFocusColor:white;
+   --clearSelectHoverColor:#aaa;
+   --inputFontSize:14px;
+   font-size: 14px;
+}
 .not_found{
    opacity: 0.7;
    text-align: center;
@@ -77,6 +94,9 @@ textarea{
 }
 .report{
    background-color: #FF8F33;
+}
+.edit{
+   background-color: #4759E6;
 }
 .scriptToolButton{
    padding:8px 15px;

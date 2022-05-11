@@ -16,7 +16,6 @@
    import Select from 'svelte-select';
    export let items
    import { openModal } from 'svelte-modals'
-   import PublishModal from '../components/PublishModal.svelte';
    import Modal from '../components/Modal.svelte';
    import { Moon } from 'svelte-loading-spinners';
    import { getNotificationsContext } from 'svelte-notifications';
@@ -144,22 +143,5 @@
 <style>
    .loader{
       display: none;
-   }
-   /* Style for the select component */
-   .themed{
-      --itemHoverBG:#FF2D551a;
-      --itemIsActiveBG:#FF2D55;
-      --background:#333333;
-      --listBackground:#333333;
-      --borderRadius:4px;
-      --border:0px;
-      --inputColor:white;
-      --height:30px;
-      --clearSelectTop:7px;
-      --clearSelectColor:white;
-      --clearSelectFocusColor:white;
-      --clearSelectHoverColor:#aaa;
-      --inputFontSize:14px;
-      font-size: 14px;
    }
 </style>

@@ -17,11 +17,17 @@
    export let id;
    export let script;
    export let file;
+   import { user } from "$lib/stores";
+   import { openModal } from 'svelte-modals'
+   import EditModal from '$components/EditModal.svelte'
    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
    let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
 
    async function registerDownload(){
       const { data, error } = await supabase.rpc('increment', { row_id:id })
+   }
+   async function edit(){
+      openModal(EditModal, {script:script})
    }
 </script>
 
@@ -34,13 +40,19 @@
       <h1>{script.name}</h1>
       <h2 class="author">Created by <span id="author_name">{script.author_name}</span></h2>
       <br>
-      <a href={link} on:click={registerDownload} class="icon download scriptToolButton" download={script.repo.filename.split('.')[0]}>{@html feather.icons['arrow-down'].toSvg()} Download</a><br>
+      <a href={link} on:click={registerDownload} class="icon download scriptToolButton" download={script.repo.filename.split('.')[0]}>{@html feather.icons['arrow-down'].toSvg()} Download</a>
 
-      <div id="buttonsBar">
-         <a href='' class="icon review scriptToolButton">{@html feather.icons['message-square'].toSvg()} Review</a>
-         <a href='' class="icon star scriptToolButton" >{@html feather.icons['star'].toSvg()} Star</a>
-         <a href='' class="icon report scriptToolButton">{@html feather.icons['alert-triangle'].toSvg()} Report</a>
-      </div>
+      {#if $user}
+         {#if $user.id == script.author_id}
+            <a href='' on:click={edit} class="icon edit scriptToolButton">{@html feather.icons['edit'].toSvg()} Edit</a>
+         {/if}
+      <br>
+         <div id="buttonsBar">
+            <a href='' class="icon review scriptToolButton">{@html feather.icons['message-square'].toSvg()} Review</a>
+            <a href='' class="icon star scriptToolButton" >{@html feather.icons['star'].toSvg()} Star</a>
+            <a href='' class="icon report scriptToolButton">{@html feather.icons['alert-triangle'].toSvg()} Report</a>
+         </div>
+      {/if}
 
       <div class="info">
          
@@ -48,6 +60,7 @@
             <h2>Informations</h2>
             <p><span class="info-title">Author:</span> {script.author_name}</p>
             <p><span class="info-title">Downloads:</span> {script.downloads}</p>
+            <p><span class="info-title">Type:</span> {script.type}</p>
             <p><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
          </div>
                  

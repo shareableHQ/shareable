@@ -45,7 +45,7 @@
 	   text-decoration: none;
    }
    a:hover{
-      color:#a1c4fd !important;
+      opacity: 0.7;
       text-decoration: underline;
    }
 </style>
