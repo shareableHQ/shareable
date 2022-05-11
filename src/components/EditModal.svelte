@@ -1,9 +1,11 @@
 <script>
    import { closeModal } from 'svelte-modals'
    import Select from 'svelte-select';
-   import { updateTitle, updateDesc, updateType } from '../lib/functions/userActions';
+   import { updateTitle, updateDesc, updateType, removeScript } from '../lib/functions/userActions';
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
+   import feather from 'feather-icons';
+
    
    export let script
    // provided by <Modals />
@@ -44,6 +46,14 @@
          window.location.reload()
       }
    }
+   async function invokeRemoveScript(){
+      let res = await removeScript(script.id)
+      if(res){
+         alert(res.message)
+      }else{
+         window.location.reload()
+      }
+   }
 </script>
  
 {#if isOpen}
@@ -51,7 +61,7 @@
    <div class="contents">
       <h2>Edit your script</h2>
       <div>
-         <div class="themed"><Select value="Title" placeholder="What do you want to edit?" on:select={handleSelect} items={['Title', 'Description', 'Type']}></Select></div>
+         <div class="themed"><Select value="Title" placeholder="What do you want to edit?" on:select={handleSelect} items={['Title', 'Description', 'Type', 'Remove script']}></Select></div>
          {#if parameter == 'Title'}
             <form on:submit|preventDefault={invokeUpdateTitle}>
                <br>
@@ -70,16 +80,29 @@
                <div class="themed"><Select value={type} placeholder="Select type" on:select={handleSelect2} items={['Script', 'Widget']}></Select></div>
                <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
             </form>
+         {:else if parameter == 'Remove script'}
+         <div class="contents"><button on:click={invokeRemoveScript} class="icon toolButton redBrandButton">{@html feather.icons.trash.toSvg()} Delete</button></div>
          {/if} 
       </div>
       <div class="actions">
-      <button class="toolButton" on:click={closeModal}>Cancel</button>
+         <button class="toolButton" on:click={closeModal}>Cancel</button>
       </div>
    </div>
 </div>
 {/if}
  
 <style>
+   .contents {
+      min-width: 240px;
+      border-radius: 6px;
+      padding: 16px;
+      background: #333333;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      pointer-events: auto;
+      color:white
+   }
    .themed{
       --background:#262626;
       --listBackground:#262626;

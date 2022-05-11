@@ -4,10 +4,12 @@
       const id = params.id
       const { data, error } = await supabase.from('scripts').select('*').eq('id', id)
       let script = data[0]
+      let file;
+      if(script){
+         let fileReq = await fetch(script.download_url)
+         file = await fileReq.text()
+      }
 
-      let fileReq = await fetch(script.download_url)
-      let file = await fileReq.text()
-      
       return {props: {id, script, file}}
    }
 </script>
@@ -29,10 +31,16 @@
    async function edit(){
       openModal(EditModal, {script:script})
    }
+   let title;
+   if(!script){
+      title = 'Nothing found here!'
+   }else{
+      title = 'Shareable | ' + script.name
+   }
 </script>
 
 <svelte:head>
-   <title>Shareable | {script.name}</title>
+   <title>{title}</title>
 </svelte:head>
 
 {#if script}

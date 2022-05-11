@@ -27,3 +27,10 @@ export async function updateType(id, type) {
       return error
    }
 }
+
+export async function removeScript(id) {
+   const { data, error } = await supabase.from('scripts').delete().match({ 'id':id })
+   if (error) {
+      return error
+   }
+}

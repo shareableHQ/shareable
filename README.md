@@ -4,8 +4,8 @@ A place to share and browse [Scriptable](https://scriptable.app) scripts and wid
 ## Core features
 - <s>Authentication with GitHub</s>
 - <s>Publish script</s>
-- Edit script
-- Remove script
+- <s>Edit script</s>
+- <s>Remove script</s>
 - <s>Download script</s>
 - Home page
 - Searching
