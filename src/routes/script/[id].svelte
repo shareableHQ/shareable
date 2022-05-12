@@ -27,6 +27,7 @@
 
    async function registerDownload(){
       const { data, error } = await supabase.rpc('increment', { row_id:id })
+      console.log(data, error)
    }
    async function edit(){
       openModal(EditModal, {script:script})
@@ -67,9 +68,9 @@
          <div class="info_child">
             <h2>Informations</h2>
             <p><span class="info-title">Author:</span> {script.author_name}</p>
-            <p><span class="info-title">Downloads:</span> {script.downloads}</p>
-            <p><span class="info-title">Type:</span> {script.type}</p>
-            <p><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
+            <p class="info-p"><span class="info-title">Downloads:</span> {script.downloads}</p>
+            <p class="info-p"><span class="info-title">Type:</span> {script.type}</p>
+            <p class="info-p"><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
          </div>
                  
          <div class="info_child">
@@ -95,6 +96,9 @@
 
 
 <style>
+   .info-p{
+      margin-bottom:-15px;
+   }
    #buttonsBar{
       margin-top: 25px;
       margin-bottom:40px
