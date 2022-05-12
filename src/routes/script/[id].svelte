@@ -86,7 +86,7 @@
 
       </div>
 
-      <div class="info_child">
+      <div id="last-info-child" class="info_child">
          <h2>Reviews</h2>
          <p style="text-align:center; opacity:0.6; padding-top:60px">Coming soon!</p>
       </div>      
@@ -98,6 +98,9 @@
 
 
 <style>
+   #last-info-child{
+      padding-top: 40px
+   }
    .info-p{
       margin-bottom:-15px;
    }
@@ -107,7 +110,7 @@
    }
    .info{
       display: grid;
-      grid-template-columns: 30% 70%;
+      grid-template-columns: 25% 75%;
       padding-left: 5px;
       padding-right: 15px;
       margin-top:50px

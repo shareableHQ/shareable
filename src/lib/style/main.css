@@ -3,6 +3,7 @@ body{
    background-color: #262626;
 	color: #ffffff;
    padding-left:10px;
+   padding-right:10px;
 }
 /* Style for the select component */
 .themed{
@@ -188,7 +189,7 @@ input, textarea{
    }
    .info{
       grid-template-columns: repeat(1, 100%) !important;
-      gap:50px
+      gap:40px
    }
 }
 

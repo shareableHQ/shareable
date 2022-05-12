@@ -92,7 +92,12 @@
 {/if}
  
 <style>
+   textarea{
+      height:200px
+   }
    .contents {
+      max-width: 80vw;
+      max-height: 80vh;
       min-width: 240px;
       border-radius: 6px;
       padding: 16px;
