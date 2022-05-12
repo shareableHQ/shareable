@@ -27,7 +27,8 @@
 
    async function registerDownload(){
       const { data, error } = await supabase.rpc('increment', { row_id:id })
-      console.log(data, error)
+      document.getElementById('invisible-download').click()
+      script.downloads = script.downloads + 1
    }
    async function edit(){
       openModal(EditModal, {script:script})
@@ -49,7 +50,8 @@
       <h1>{script.name}</h1>
       <h2 class="author">Created by <span id="author_name">{script.author_name}</span></h2>
       <br>
-      <a href={link} on:click={registerDownload} class="icon download scriptToolButton" download={script.repo.filename.split('.')[0]}>{@html feather.icons['arrow-down'].toSvg()} Download</a>
+      <a href='' on:click={registerDownload} class="icon download scriptToolButton">{@html feather.icons['arrow-down'].toSvg()} Download</a>
+      <a href={link} download={script.repo.filename.split('.')[0]} id="invisible-download" style="display=none;"> </a>
 
       {#if $user}
          {#if $user.id == script.author_id}
