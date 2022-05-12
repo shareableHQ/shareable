@@ -67,7 +67,7 @@
          
          <div class="info_child">
             <h2>Informations</h2>
-            <p><span class="info-title">Author:</span> {script.author_name}</p>
+            <p class="info-p"><span class="info-title">Author:</span> {script.author_name}</p>
             <p class="info-p"><span class="info-title">Downloads:</span> {script.downloads}</p>
             <p class="info-p"><span class="info-title">Type:</span> {script.type}</p>
             <p class="info-p"><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
