@@ -20,8 +20,7 @@
    export let script;
    export let file;
    import { user } from "$lib/stores";
-   import { openModal } from 'svelte-modals'
-   import EditModal from '$components/EditModal.svelte'
+   import Breadcrumbs from '$components/Breadcrumbs.svelte'
    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
    let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
 
@@ -30,15 +29,15 @@
       document.getElementById('invisible-download').click()
       script.downloads = script.downloads + 1
    }
-   async function edit(){
-      openModal(EditModal, {script:script})
-   }
    let title;
    if(!script){
       title = 'Nothing found here!'
    }else{
       title = 'Shareable | ' + script.name
    }
+   let editLink = '/edit?id=' + id
+   let scriptLink = '/script/' + id
+   let path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
 </script>
 
 <svelte:head>
@@ -47,6 +46,7 @@
 
 {#if script}
    <div class="script_page">
+      <Breadcrumbs path={path} />
       <h1>{script.name}</h1>
       <h2 class="author">Created by <span id="author_name">{script.author_name}</span></h2>
       <br>
@@ -55,7 +55,7 @@
 
       {#if $user}
          {#if $user.id == script.author_id}
-            <a href='' on:click={edit} class="icon edit scriptToolButton">{@html feather.icons['edit'].toSvg()} Edit</a>
+            <a href={editLink}  class="icon edit scriptToolButton">{@html feather.icons['edit'].toSvg()} Edit</a>
          {/if}
       <br>
          <div id="buttonsBar">

@@ -22,6 +22,7 @@
    const { addNotification } = getNotificationsContext();
    import { goto } from "$app/navigation";
    import { browser } from '$app/env'
+   import Breadcrumbs from '$components/Breadcrumbs.svelte'
    export let username
    export let id
    if(browser && !id){
@@ -31,7 +32,7 @@
    const labelIdentifier = 'name'
    
    
-   let name, repo, path, type;
+   let name, repo, repo_path, type;
    let desc = '';
    async function publish(){
       if(!repo){
@@ -53,7 +54,7 @@
                repo:{
                   repo_id:repo.id,
                   repo_name: repo.name,
-                  file_path:path
+                  file_path:repo_path
                }
             })
          })
@@ -83,6 +84,7 @@
    function handleSelect2(event){
       type = event.detail
    }
+   let path = [{name:'Home', url:'/', last:false}, {name:'Publish' ,url:'', last:true}]
 </script>
 
 <svelte:head>
@@ -92,6 +94,7 @@
 {#if id}
    <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
    <div id="page">
+      <Breadcrumbs path={path} />
       <h1>Publish from GitHub</h1>
    <form on:submit|preventDefault={publish}>
       <div class="description-editor">

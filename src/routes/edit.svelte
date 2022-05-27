@@ -1,0 +1,119 @@
+<script context="module">
+   import supabase from '$lib/db';
+   export async function load({url}){
+      const scriptID = url.searchParams.get('id')
+      let error = null
+      let authorID;
+      let data;
+      let script;
+      try{
+         authorID = supabase.auth.user().id
+      }catch{}
+      data = await supabase.from('scripts').select('*').eq('id', scriptID).eq('author_id',authorID)      
+      if(!data || data.error){
+         error = 'Missing authorization'
+      }else{
+         script = data.data[0]
+      }
+      return {props:{scriptID, error, script}}
+   }
+</script>
+
+<script>
+   import { goto } from "$app/navigation";
+   import { browser } from '$app/env'
+   import { user } from "$lib/stores";
+   import { updateTitle, updateDesc, updateType, removeScript } from '../lib/functions/userActions';
+   import Select from 'svelte-select';
+   import feather from 'feather-icons';
+   import Breadcrumbs from '$components/Breadcrumbs.svelte'
+   export let scriptID
+   export let error
+   export let script
+    
+   console.log(script)
+   let title, desc, type;
+   
+   let parameter = 'Title';
+   if(script){
+      title = script.name;
+      desc = script.desc;
+      type = script.type
+   }
+
+   function handleSelect(event){
+      parameter = event.detail.value
+   }
+   function handleSelect2(event){
+      type = event.detail.value
+   }
+   async function invokeUpdateTitle(){
+      let res = await updateTitle(script.id, title)
+      if(res){
+         alert(res.message)
+      }else{
+         window.location.reload()
+      }
+   }
+   async function invokeUpdateDesc(){
+      let res = await updateDesc(script.id, desc)
+      if(res){
+         alert(res.message)
+      }else{
+         window.location.reload()
+      }
+   }
+   async function invokeUpdateType(){
+      let res = await updateType(script.id, type)
+      if(res){
+         alert(res.message)
+      }else{
+         window.location.reload()
+      }
+   }
+   async function invokeRemoveScript(){
+      let res = await removeScript(script.id)
+      if(res){
+         alert(res.message)
+      }else{
+         window.location.reload()
+      }
+   }
+   
+   
+   if(browser && error || browser && !$user){
+      goto('/script/' + scriptID)
+   }
+   let scriptLink = '/script/' + scriptID
+   let path = [{name:'Home', url:'/', last:false}, {name:title, url: scriptLink, last:false}, {name:'Edit' ,url:'', last:true}]
+</script>
+
+
+<div id="page">
+   <Breadcrumbs path={path} />
+   <h1>{title}</h1>
+   <div>
+      <div class="themed"><Select value="Title" placeholder="What do you want to edit?" on:select={handleSelect} items={['Title', 'Description', 'Type', 'Remove script']}></Select></div>
+      <p class="label">Choose what you want to edit.</p>
+      <br>
+      {#if parameter != 'Remove script'}<h2>Edit {parameter}</h2>{:else}<h2>{parameter}</h2>{/if}
+      {#if parameter == 'Title'}
+         <form on:submit|preventDefault={invokeUpdateTitle}>
+            <input type="text" class="form" placeholder="Script name" required="required" bind:value={title}><br><br>
+            <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
+         </form>
+      {:else if parameter == 'Description'}
+         <form on:submit|preventDefault={invokeUpdateDesc}>
+            <textarea class="form textarea" cols="30" rows="20" bind:value={desc}></textarea><br>
+            <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
+         </form>
+      {:else if parameter == 'Type'}
+         <form on:submit|preventDefault={invokeUpdateType}>
+            <div class="themed"><Select value={type} placeholder="Select type" on:select={handleSelect2} items={['Script', 'Widget']}></Select></div><br>
+            <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
+         </form>
+      {:else if parameter == 'Remove script'}
+      <div class="contents"><button on:click={invokeRemoveScript} class="icon toolButton redBrandButton">{@html feather.icons.trash.toSvg()} Delete</button></div>
+      {/if} 
+</div>
+</div>

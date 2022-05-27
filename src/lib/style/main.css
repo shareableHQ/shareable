@@ -50,6 +50,23 @@ textarea{
    border-radius: 15px;
    background-color: #FF2D551a;
 }
+.breadcrumbs{
+   width: fit-content;
+   border:0.5px #a1c4fd solid;
+   padding: 2px 10px;
+   border-radius: 15px;
+   text-align: left;
+   background-color: #a1c4fd1a;
+   font-size: 14px;
+}
+.breadcrumbs > a{
+   text-decoration: none;
+   color:#a1c4fd
+}
+.breadcrumbs > a:hover{
+   text-decoration: underline;
+   opacity: 0.8;
+}
 
 /* BUTTONS */
 .button{
@@ -80,6 +97,10 @@ textarea{
    border-radius: 4px;
    color:white;
    background-color: #404040;
+}
+#submitButton{
+   font-size: 15px;
+   padding:5px 30px;
 }
 .redBrandButton, .download{
    background-color: #FF2D55;

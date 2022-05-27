@@ -29,7 +29,7 @@
    <nav>
       <div class="left-block">
          <a on:click={openMenu} class="button-icon nav-title nav-link icon" href="#">{@html feather.icons.menu.toSvg()}</a>
-         <a class="nav-title nav-link" href="#">Shareable <span class="status">Alpha</span></a>
+         <a class="nav-title nav-link" href="/">Shareable <span class="status">Alpha</span></a>
       </div>
       <div class="rigth-block">
          {#if $user.email}
