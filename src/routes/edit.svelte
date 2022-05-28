@@ -31,7 +31,6 @@
    export let error
    export let script
     
-   console.log(script)
    let title, desc, type;
    
    let parameter = 'Title';
@@ -52,7 +51,7 @@
       if(res){
          alert(res.message)
       }else{
-         window.location.reload()
+         goto('/script/' + scriptID)
       }
    }
    async function invokeUpdateDesc(){
@@ -60,7 +59,7 @@
       if(res){
          alert(res.message)
       }else{
-         window.location.reload()
+         goto('/script/' + scriptID)
       }
    }
    async function invokeUpdateType(){
@@ -68,7 +67,7 @@
       if(res){
          alert(res.message)
       }else{
-         window.location.reload()
+         goto('/script/' + scriptID)
       }
    }
    async function invokeRemoveScript(){
@@ -76,7 +75,7 @@
       if(res){
          alert(res.message)
       }else{
-         window.location.reload()
+         goto('/script/' + scriptID)
       }
    }
    
@@ -91,7 +90,7 @@
 
 <div id="page">
    <Breadcrumbs path={path} />
-   <h1>{title}</h1>
+   <h1>Edit script</h1>
    <div>
       <div class="themed"><Select value="Title" placeholder="What do you want to edit?" on:select={handleSelect} items={['Title', 'Description', 'Type', 'Remove script']}></Select></div>
       <p class="label">Choose what you want to edit.</p>
@@ -106,6 +105,7 @@
          <form on:submit|preventDefault={invokeUpdateDesc}>
             <textarea class="form textarea" cols="30" rows="20" bind:value={desc}></textarea><br>
             <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
+            <br><br>
          </form>
       {:else if parameter == 'Type'}
          <form on:submit|preventDefault={invokeUpdateType}>
