@@ -2,6 +2,7 @@
    import feather from 'feather-icons';
    import { sidebar } from '$lib/stores.js';
    import { user } from "$lib/stores";
+   import { startLoad, endLoad } from '$lib/functions/utils';
    let isOpen = false
    $:{
       console.log($sidebar)
@@ -10,6 +11,7 @@
    function closeSidebar(){
       sidebar.set(false)
       document.getElementsByTagName('body')[0].style.overflow = 'unset'
+      startLoad()
    }
 </script>
 

@@ -20,6 +20,7 @@
 </script>
 
 <script>
+   import { Moon } from 'svelte-loading-spinners';
    import { goto } from "$app/navigation";
    import { browser } from '$app/env'
    import { user } from "$lib/stores";
@@ -88,6 +89,7 @@
 </script>
 
 
+<div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
 <div id="page">
    <Breadcrumbs path={path} />
    <h1>Edit script</h1>
@@ -117,3 +119,10 @@
       {/if} 
 </div>
 </div>
+
+
+<style>
+   .loader{
+      display: none;
+   }
+</style>

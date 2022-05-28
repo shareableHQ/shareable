@@ -16,6 +16,7 @@
 
 <script>
    import feather from 'feather-icons';
+   import { Moon } from 'svelte-loading-spinners';
    export let id;
    export let script;
    export let file;
@@ -23,6 +24,7 @@
    import Breadcrumbs from '$components/Breadcrumbs.svelte'
    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
    let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
+   import { startLoad } from '$lib/functions/utils';
 
    async function registerDownload(){
       const { data, error } = await supabase.rpc('increment', { row_id:id })
@@ -44,6 +46,7 @@
    <title>{title}</title>
 </svelte:head>
 
+<div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
 {#if script}
    <div class="script_page">
       <Breadcrumbs path={path} />
@@ -55,7 +58,7 @@
 
       {#if $user}
          {#if $user.id == script.author_id}
-            <a href={editLink}  class="icon edit scriptToolButton">{@html feather.icons['edit'].toSvg()} Edit</a>
+            <a href={editLink} on:click={startLoad}  class="icon edit scriptToolButton">{@html feather.icons['edit'].toSvg()} Edit</a>
          {/if}
       <br>
          <div id="buttonsBar">
@@ -131,5 +134,8 @@
    }
    #author_name{
       color:#a1c4fd;
+   }
+   .loader{
+      display: none;
    }
 </style>
