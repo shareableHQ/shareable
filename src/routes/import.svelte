@@ -111,7 +111,7 @@
             <div class="themed"><Select {items} placeholder="Select repo" on:select={handleSelect} on:clear={handleDeselect} {optionIdentifier} {labelIdentifier}/></div>
             <p class="label">Choose the GitHub repo where the file you want to publish is (only public repos are supported as of now).</p>
             {#if repo}
-               <input type="text" class="form" placeholder="path/to/file.js" required="required" bind:value={path}>
+               <input type="text" class="form" placeholder="path/to/file.js" required="required" bind:value={repo_path}>
                <p class="label">Type the path to the JavaScript file that contains your script's code. Example: "code/main.js"</p>
             {/if}
          </div>
