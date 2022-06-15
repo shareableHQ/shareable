@@ -1,0 +1,23 @@
+/* MOBILE */
+@media(max-width:550px){
+   .form, .desc{
+      width: 90% !important;
+   }
+   .themed{
+      width: 88vw;
+   }
+   .textarea{
+      width: 88%!important;
+   }
+   .description-editor{
+      flex-direction: column;
+      gap: 0px;
+   }
+   .info{
+      grid-template-columns: repeat(1, 100%) !important;
+      gap:40px
+   }
+   .scripts-container{
+      justify-content: center;
+   }
+}

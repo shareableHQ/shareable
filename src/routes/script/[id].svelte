@@ -4,13 +4,17 @@
       const id = params.id
       const { data, error } = await supabase.from('scripts').select('*').eq('id', id)
       let script = data[0]
-      let file;
+      let file, readme;
       if(script){
          let fileReq = await fetch(script.download_url)
          file = await fileReq.text()
       }
+      if(script.repo.readme_path){
+         let readmeReq = await fetch(script.repo.readme_download_url)
+         readme = await readmeReq.text()
+      }
 
-      return {props: {id, script, file}}
+      return {props: {id, script, file, readme}}
    }
 </script>
 
@@ -20,11 +24,14 @@
    export let id;
    export let script;
    export let file;
+   export let readme;
+   const source = `${readme}`
    import { user } from "$lib/stores";
    import Breadcrumbs from '$components/Breadcrumbs.svelte'
    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
    let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
    import { startLoad } from '$lib/functions/utils';
+   import SvelteMarkdown from 'svelte-markdown'
 
    async function registerDownload(){
       const { data, error } = await supabase.rpc('increment', { row_id:id })
@@ -80,8 +87,10 @@
                  
          <div class="info_child">
             <h2>Description</h2>
-            {#if script.desc}
-               <p>{script.desc}</p>
+            {#if script.repo.readme_path}
+               <div class="desc">
+                  <SvelteMarkdown {source} />
+               </div>
             {:else}
                <p>No description provided!</p>
             {/if}
@@ -101,40 +110,6 @@
 
 
 <style>
-   #last-info-child{
-      padding-top: 40px
-   }
-   .info-p{
-      margin-bottom:-15px;
-   }
-   #buttonsBar{
-      margin-top: 25px;
-      margin-bottom:40px
-   }
-   .info{
-      display: grid;
-      grid-template-columns: 25% 75%;
-      padding-left: 5px;
-      padding-right: 15px;
-      margin-top:50px
-   }
-   .info_child{
-      text-align: left;
-   }
-   .info-title{
-      color:#aaa
-   }
-   .script_page{
-      text-align: center;
-   }
-   .author{
-      font-weight: 400;
-      margin-top: -20px;
-      font-size: 21px;
-   }
-   #author_name{
-      color:#a1c4fd;
-   }
    .loader{
       display: none;
    }

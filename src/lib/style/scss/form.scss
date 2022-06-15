@@ -1,0 +1,49 @@
+/* FORM */
+.label{
+   opacity: 0.6;
+   margin-top:-2px;
+   margin-left:5px;
+   font-size: 11px;
+}
+input, textarea{
+   color:white;
+   background-color: #333333;
+   padding: 7px 15px;
+   padding-left: 10px;
+   font-size: 14px;
+   border: 0px;
+   border-radius: 4px;
+}
+textarea{
+   resize: none;
+}
+.themed{
+   width:402px;
+   margin-bottom: 10px;
+   margin-top: 5px;
+}
+.form{
+   margin-bottom: 5px;
+   width: 380px;
+}
+.description-editor{
+   display: flex;
+   gap: 40px;
+}
+/* Style for the select component */
+.themed{
+   --itemHoverBG:#FF2D551a;
+   --itemIsActiveBG:#FF2D55;
+   --background:#333333;
+   --listBackground:#333333;
+   --borderRadius:4px;
+   --border:0px;
+   --inputColor:white;
+   --height:30px;
+   --clearSelectTop:7px;
+   --clearSelectColor:white;
+   --clearSelectFocusColor:white;
+   --clearSelectHoverColor:#aaa;
+   --inputFontSize:14px;
+   font-size: 14px;
+}

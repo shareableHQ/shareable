@@ -1,0 +1,60 @@
+/* BUTTONS */
+.button{
+	padding:5px 7px;
+}
+.button-icon{
+	padding:5px 10px;
+   background-color: #404040;
+   border-radius: 4px;
+   margin-right: 5px;
+}
+.nav-button{
+   padding:5px 10px;
+   border: 0px;
+   border-radius: 4px;
+   text-decoration: none;
+   color: unset;
+   font-size: 15px;
+}
+.button:hover{
+	background-color: #404040;
+	border-radius:8px;
+}
+.toolButton{
+   padding:5px 25px;
+   font-size: 13px;
+   border: 0px;
+   border-radius: 4px;
+   color:white;
+   background-color: #404040;
+}
+#submitButton{
+   font-size: 15px;
+   padding:5px 30px;
+}
+.redBrandButton, .download{
+   background-color: #FF2D55;
+}
+.star{
+   background-color: #FFE677;
+   color: #404040 !important;
+
+}
+.review{
+   background-color: #90EE90;
+   color: #404040 !important;
+}
+.report{
+   background-color: #FF8F33;
+}
+.edit{
+   background-color: #4759E6;
+}
+.scriptToolButton{
+   padding:8px 15px;
+   border: 0px;
+   border-radius: 4px;
+   text-decoration: none;
+   color: white;
+   font-size: 15px;
+}

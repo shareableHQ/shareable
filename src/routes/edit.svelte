@@ -105,7 +105,8 @@
          </form>
       {:else if parameter == 'Description'}
          <form on:submit|preventDefault={invokeUpdateDesc}>
-            <textarea class="form textarea" cols="30" rows="20" bind:value={desc}></textarea><br>
+            <input type="text" class="form desc" placeholder="A brief description of your script" required="required" maxlength="100" bind:value={desc}>
+            <p class="label">Description of your script</p>
             <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
             <br><br>
          </form>
@@ -124,5 +125,8 @@
 <style>
    .loader{
       display: none;
+   }
+   .desc{
+      width:50%
    }
 </style>

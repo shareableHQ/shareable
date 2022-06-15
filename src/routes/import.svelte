@@ -33,6 +33,7 @@
    
    
    let name, repo, repo_path, type;
+   let readme_path = 'README.md';
    let desc = '';
    async function publish(){
       if(!repo){
@@ -54,7 +55,8 @@
                repo:{
                   repo_id:repo.id,
                   repo_name: repo.name,
-                  file_path:repo_path
+                  file_path:repo_path,
+                  readme_path: readme_path
                }
             })
          })
@@ -118,8 +120,11 @@
       </div>
       
       <h3>Description</h3>
-         <textarea class="form textarea" cols="30" rows="30" bind:value={desc}></textarea>
-         <p class="label">Description of your script. Supports markdown.</p>
+         <input type="text" class="form desc" placeholder="A brief description of your script" required="required" maxlength="100" bind:value={desc}>
+         <p class="label">Description of your script</p>
+
+         <input type="text" class="form"  bind:value={readme_path}>
+         <p class="label">Type the path to the README file that will be used as your script's description"</p>
       <!-- <div class="description-editor">
          <div>
             <h3>Description</h3>
@@ -146,5 +151,8 @@
 <style>
    .loader{
       display: none;
+   }
+   .desc{
+      width:50%
    }
 </style>

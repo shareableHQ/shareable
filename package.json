@@ -19,6 +19,7 @@
     "@supabase/supabase-js": "^1.35.2",
     "feather-icons": "^4.29.0",
     "octokit": "^1.7.1",
+    "svelte-markdown": "^0.2.2",
     "svelte-modals": "^1.1.0",
     "svelte-notifications": "^0.9.93",
     "svelte-select": "^4.4.7"
