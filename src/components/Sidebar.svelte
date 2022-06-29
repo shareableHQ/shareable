@@ -22,6 +22,7 @@
        </p>
       <div class="headerLinks">
          <a on:click={closeSidebar} class="icon" href="/">{@html feather.icons.home.toSvg()} Home</a>
+         <a on:click={closeSidebar} class="icon" href="/search">{@html feather.icons.search.toSvg()} Search</a>
          {#if $user.email}
             <a on:click={closeSidebar} class="icon" href="/import">{@html feather.icons['plus-circle'].toSvg()} Publish from GitHub</a>
          {/if}

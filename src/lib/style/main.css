@@ -406,4 +406,18 @@ body {
   padding: 2px 7px;
   border-radius: 15px;
   background-color: rgba(255, 45, 85, 0.1019607843);
+}
+
+.seachForm {
+  width: 75%;
+}
+
+.searchBar {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.searchButton {
+  padding: 5px 20px;
 }/*# sourceMappingURL=main.css.map */

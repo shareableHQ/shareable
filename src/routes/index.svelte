@@ -10,17 +10,19 @@
    }
 </script>
 <script>
-   import { user } from "$lib/stores";
    import { Moon } from 'svelte-loading-spinners';
-   import { browser } from '$app/env'
-   import { startLoad, endLoad } from '$lib/functions/utils';
    import feather from 'feather-icons';
 
    export let data
 
 
    let recent = data.slice(0, 5);
-   console.log(recent)
+   
+   let searchParam;
+   async function search(){
+      const url = '/search?q=' + searchParam 
+      window.location.href = url;
+   }
 </script>
 
 <svelte:head>
@@ -29,6 +31,10 @@
 
 <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
 <div id="page">
+   <form class="searchBar" on:submit|preventDefault={search}>
+      <input bind:value={searchParam} class="seachForm" type="text" name="search" id="" placeholder="Search">
+      <button type="submit" class="toolButton searchButton icon">{@html feather.icons['search'].toSvg()}</button>
+   </form>
    <h2>Recent</h2>
    <div class="scripts-container">
       {#each recent as script}
@@ -65,7 +71,6 @@
       padding-left: 50px;
       padding-right: 40px;
    }
-
    @media(max-width:550px){
       #page{
          padding-top: 20px;

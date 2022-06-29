@@ -8,7 +8,7 @@ A place to share and browse [Scriptable](https://scriptable.app) scripts and wid
 - <s>Remove script</s>
 - <s>Download script</s>
 - Home page
-- Searching
+- <s>Searching</s>
 - Author pages
 
 ## Additional features
