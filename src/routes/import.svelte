@@ -78,7 +78,6 @@
    
    function handleSelect(event){
       repo = event.detail
-      console.log(repo)
    }
    function handleDeselect(){
       repo = null
