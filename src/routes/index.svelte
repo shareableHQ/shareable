@@ -14,6 +14,7 @@
 <script>
    import { Moon } from 'svelte-loading-spinners';
    import feather from 'feather-icons';
+   import Footer from '$components/Footer.svelte';
 
    export let data, most_downloaded
 
@@ -68,8 +69,7 @@
          </div>
       {/each}
 	</div>
-
-   
+<Footer />
 </div>
 
 
