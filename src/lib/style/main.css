@@ -219,6 +219,11 @@ textarea {
   .scripts-container {
     justify-content: center;
   }
+
+  .sidebar, .sidebar-fake {
+    left: -100vw !important;
+    width: 100vw !important;
+  }
 }
 /* NAVBAR */
 .fake {
