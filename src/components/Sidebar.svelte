@@ -33,7 +33,7 @@
        </p>
        <div class="headerLinks">
          <a class="icon" href="https://github.com/shareableHQ/shareable" target="_blank">{@html feather.icons.github.toSvg()} Source code</a>
-         <a class="icon" href="/team">{@html feather.icons.users.toSvg()} Shareable Team</a>
+         <a class="icon" on:click={closeSidebar} href="/team">{@html feather.icons.users.toSvg()} Shareable Team</a>
        </div>
    </div>
 </div>

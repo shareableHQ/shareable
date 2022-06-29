@@ -1,6 +1,7 @@
 <div>
    <br><br><br>
    <p>Shareable 2022 ©<br>Join the Scriptable community on Discord</p>
+   <br>
 </div>
 
 <style>

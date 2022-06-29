@@ -34,6 +34,7 @@
 
 <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
 <div id="page">
+   <h1 id="title">Welcome to Shareable!</h1>
    <form class="searchBar" on:submit|preventDefault={search}>
       <input bind:value={searchParam} class="seachForm" type="text" name="search" id="" placeholder="Search">
       <button type="submit" class="toolButton searchButton icon">{@html feather.icons['search'].toSvg()}</button>
@@ -74,6 +75,9 @@
 
 
 <style>
+   #title{
+      text-align: center;
+   }
 .tag{
    background-color: #ffffff1a;
    padding:5px 10px;
@@ -84,7 +88,7 @@
       display: none;
    }
    #page{
-      padding-top: 50px;
+      padding-top: 30px;
       padding-left: 50px;
       padding-right: 40px;
    }
