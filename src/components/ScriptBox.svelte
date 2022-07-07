@@ -1,5 +1,6 @@
 <script>
    import feather from 'feather-icons';
+   import { startLoad } from '$lib/functions/utils';
    export let script
 </script>
 
@@ -10,6 +11,6 @@
       <p class="script-details"><span class="icon tag">{@html feather.icons['arrow-down'].toSvg()} {script.downloads}</span> <span class="icon tag">{#if script.type == 'Widget'}{@html feather.icons['smartphone'].toSvg()}{:else}{@html feather.icons['code'].toSvg()}{/if} {script.type}</span></p>
    </div>
    <div class="script-right">
-      <a class="script-link" href={"/script/" + script.id}>GET</a>
+      <a class="script-link" on:click={startLoad} href={"/script/" + script.id}>GET</a>
    </div>
 </div>

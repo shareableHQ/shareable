@@ -68,11 +68,11 @@
             <a href={editLink} on:click={startLoad}  class="icon edit scriptToolButton">{@html feather.icons['edit'].toSvg()} Edit</a>
          {/if}
       <br>
-         <div id="buttonsBar">
+         <!-- <div id="buttonsBar">
             <a href='' class="icon review scriptToolButton">{@html feather.icons['message-square'].toSvg()} Review</a>
             <a href='' class="icon star scriptToolButton" >{@html feather.icons['star'].toSvg()} Star</a>
             <a href='' class="icon report scriptToolButton">{@html feather.icons['alert-triangle'].toSvg()} Report</a>
-         </div>
+         </div> -->
       {/if}
 
       <div class="info">
@@ -98,10 +98,10 @@
 
       </div>
 
-      <div id="last-info-child" class="info_child">
+      <!-- <div id="last-info-child" class="info_child">
          <h2>Reviews</h2>
          <p style="text-align:center; opacity:0.6; padding-top:60px">Coming soon!</p>
-      </div>      
+      </div>       -->
    </div>
 {:else}
    <p class="not_found">We found nothing here!</p>
