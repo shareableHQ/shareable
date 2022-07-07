@@ -7,7 +7,7 @@
          })         
       data = data.reverse()
       let most_downloaded = await supabase.from('scripts').select('*').order('downloads', { ascending: false })
-      most_downloaded = most_downloaded.data
+      most_downloaded = most_downloaded.data.slice(0, 6);
       return {props:{data, most_downloaded}}
    }
 </script>
@@ -15,11 +15,12 @@
    import { Moon } from 'svelte-loading-spinners';
    import feather from 'feather-icons';
    import Footer from '$components/Footer.svelte';
+   import ScriptBox from '$components/ScriptBox.svelte';
 
    export let data, most_downloaded
 
 
-   let recent = data.slice(0, 5);
+   let recent = data.slice(0, 6);
    
    let searchParam;
    async function search(){
@@ -42,32 +43,14 @@
    <h2>Recent</h2>
    <div class="scripts-container">
       {#each recent as script}
-         <div class="script-cell">
-            <div class="script-left">
-               <p class="script-title">{script.name}</p>
-               <p class="script-author-date">{script.desc}</p>
-               <p class="script-details"><span class="icon tag">{@html feather.icons['arrow-down'].toSvg()} {script.downloads}</span> <span class="icon tag">{#if script.type == 'Widget'}{@html feather.icons['grid'].toSvg()}{:else}{@html feather.icons['code'].toSvg()}{/if} {script.type}</span></p>
-            </div>
-            <div class="script-right">
-               <a class="script-link" href={"/script/" + script.id}>GET</a>
-            </div>
-         </div>
+         <ScriptBox script={script} />
       {/each}
 	</div>
    <br><br><br>
    <h2>Most downloaded</h2>
    <div class="scripts-container">
       {#each most_downloaded as script}
-         <div class="script-cell">
-            <div class="script-left">
-               <p class="script-title">{script.name}</p>
-               <p class="script-author-date">{script.desc}</p>
-               <p class="script-details"><span class="icon tag">{@html feather.icons['arrow-down'].toSvg()} {script.downloads}</span> <span class="icon tag">{#if script.type == 'Widget'}{@html feather.icons['grid'].toSvg()}{:else}{@html feather.icons['code'].toSvg()}{/if} {script.type}</span></p>
-            </div>
-            <div class="script-right">
-               <a class="script-link" href={"/script/" + script.id}>GET</a>
-            </div>
-         </div>
+         <ScriptBox script={script} />
       {/each}
 	</div>
 <Footer />
@@ -78,12 +61,6 @@
    #title{
       text-align: center;
    }
-.tag{
-   background-color: #ffffff1a;
-   padding:5px 10px;
-   border-radius: 10px;
-   color:#fff;
-}
    .loader{
       display: none;
    }

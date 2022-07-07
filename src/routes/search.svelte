@@ -14,6 +14,7 @@
 <script>
    import feather from 'feather-icons';
    export let results = [], query;
+   import ScriptBox from '$components/ScriptBox.svelte';
 
    let searchParam = query;
    async function search(){
@@ -26,6 +27,10 @@
    }
 </script>
 
+<svelte:head>
+   <title>Shareable | Search</title>
+</svelte:head>
+
 
 <div id="page">
    <form class="searchBar" on:submit|preventDefault={search}>
@@ -36,16 +41,7 @@
    <h2>Search results</h2>
       <div class="scripts-container">
          {#each results as script}
-            <div class="script-cell">
-               <div class="script-left">
-                  <p class="script-title">{script.name}</p>
-                  <p class="script-author-date">{script.desc}</p>
-                  <p class="script-details"><span class="icon tag">{@html feather.icons['arrow-down'].toSvg()} {script.downloads}</span> <span class="icon tag">{#if script.type == 'Widget'}{@html feather.icons['grid'].toSvg()}{:else}{@html feather.icons['code'].toSvg()}{/if} {script.type}</span></p>
-               </div>
-               <div class="script-right">
-                  <a class="script-link" href={"/script/" + script.id}>GET</a>
-               </div>
-            </div>
+            <ScriptBox script={script} />
          {/each}
       </div>
    {:else}

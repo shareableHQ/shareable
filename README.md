@@ -9,6 +9,7 @@ A place to share and browse [Scriptable](https://scriptable.app) scripts and wid
 - <s>Download script</s>
 - <s>Home page</s>
 - <s>Searching</s>
+- <s>Browsing scripts</s>
 - Author pages
 
 ## Additional features
@@ -16,4 +17,4 @@ A place to share and browse [Scriptable](https://scriptable.app) scripts and wid
 - Report script
 - Rate script
 - Star script
-- Discord integration
+- <s>Discord integration</s>

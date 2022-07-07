@@ -3,15 +3,19 @@
    import { sidebar } from '$lib/stores.js';
    import { user } from "$lib/stores";
    import { startLoad, endLoad } from '$lib/functions/utils';
+   import { tagStore } from '$lib/stores';
    let isOpen = false
    $:{
-      console.log($sidebar)
+      //console.log($sidebar)
       isOpen = $sidebar
    }
-   function closeSidebar(){
+   function closeSidebar(tag){
       sidebar.set(false)
       document.getElementsByTagName('body')[0].style.overflow = 'unset'
       startLoad()
+      if(tag){
+         tagStore.set(!$tagStore)
+      }
    }
 </script>
 
@@ -26,6 +30,14 @@
          {#if $user.email}
             <a on:click={closeSidebar} class="icon" href="/import">{@html feather.icons['plus-circle'].toSvg()} Publish from GitHub</a>
          {/if}
+       </div>
+
+       <p class="sidebarHeader">
+         <span>Browse</span>
+       </p>
+       <div class="headerLinks">
+         <a on:click={(()=>{closeSidebar('Script')})} class="icon" href="/browse?tag=Script">{@html feather.icons.code.toSvg()} Browse scripts</a>
+         <a on:click={(()=>{closeSidebar('Widget')})} class="icon" href="/browse?tag=Widget">{@html feather.icons.smartphone.toSvg()} Browse widgets</a>
        </div>
 
        <p class="sidebarHeader">

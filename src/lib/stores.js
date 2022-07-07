@@ -5,3 +5,5 @@ import supabase from "$lib/db";
 export const user = writable(supabase.auth.user() || false);
 // Layout
 export const sidebar = writable(false)
+// Tag
+export const tagStore = writable(true)

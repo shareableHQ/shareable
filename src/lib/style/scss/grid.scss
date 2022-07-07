@@ -9,6 +9,12 @@
    // gap:15px;
    // flex-wrap: wrap;
 }
+.tag{
+   background-color: #ffffff1a;
+   padding:5px 10px;
+   border-radius: 10px;
+   color:#fff;
+}
 @media(max-width:1024px){
    .scripts-container{
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
@@ -37,7 +43,7 @@
 .script-link{
    background-color:#a1c4fd;
    color:white;
-   padding: 4px 15px;
+   padding: 8px 15px;
    text-decoration: none;
    border-radius: 8px;
    font-size: 15px;

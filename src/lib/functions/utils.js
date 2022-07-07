@@ -4,6 +4,6 @@ export function startLoad() {
 }
 
 export function endLoad() {
-   document.getElementById('page').style.display = 'block'
-   document.getElementsByClassName('loader')[0].style.display = 'none'
+   document.getElementsByClassName('loader')[0].style.display = 'none';
+   document.getElementById('page').style.display = 'block';
 }
