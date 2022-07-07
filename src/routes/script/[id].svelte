@@ -9,11 +9,12 @@
          let fileReq = await fetch(script.download_url)
          file = await fileReq.text()
       }
-      if(script.repo.readme_path){
-         let readmeReq = await fetch(script.repo.readme_download_url)
-         readme = await readmeReq.text()
+      if(data.length > 0){
+         if(script.repo.readme_path){
+            let readmeReq = await fetch(script.repo.readme_download_url)
+            readme = await readmeReq.text()
+         }
       }
-
       return {props: {id, script, file, readme}}
    }
 </script>
@@ -39,6 +40,7 @@
       script.downloads = script.downloads + 1
    }
    let title;
+   let path = []
    if(!script){
       title = 'Nothing found here!'
    }else{
@@ -46,7 +48,9 @@
    }
    let editLink = '/edit?id=' + id
    let scriptLink = '/script/' + id
-   let path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
+   if(script){
+      path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
+   }
 </script>
 
 <svelte:head>
