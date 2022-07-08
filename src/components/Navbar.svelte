@@ -32,6 +32,7 @@
          degrees = 90
       }
       document.getElementById('chevron').children[0].style.transform = 'rotate(' + degrees + 'deg)'
+      
    }
 </script>
 
@@ -72,17 +73,18 @@
    }
    #floating-modal{
       position: absolute;
-      right: -160px;
+      right: 10px;
       top:60px;
       width: 150px;
       text-align: center;
       border-radius: 4px;
       background-color: #333333;
-      transition: all 0.3s ease-in-out;
+      transition: right 0.3s ease-in-out;
       padding-bottom:10px;
-      padding-top:10px ;
+      padding-top:10px;
+      display: none;
    }
    .isVisible{
-      right: 10px !important;
+      display: block !important;
    }
 </style>
