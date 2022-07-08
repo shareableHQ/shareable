@@ -7,9 +7,14 @@
   import Sidebar from '../components/Sidebar.svelte';
   import supabase from "$lib/db";
   supabase.auth.onAuthStateChange((event, session) => {
-    console.log(event)
     if(event == 'SIGNED_IN'){
       $user = session.user
+    }
+  })
+  import { onMount } from 'svelte';
+  onMount(()=>{
+    if(!$user && supabase.auth.user()){
+      $user = supabase.auth.user()
     }
   })
   import { loading } from '$lib/stores';
