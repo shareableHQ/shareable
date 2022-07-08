@@ -27,7 +27,7 @@ export async function post({ params, request }) {
    let res
    if (!error) {
       res = { status: 'success', id: data[0].id }
-      let message = `${body.author.author_username} just published their new ${body.type}: [${body.title}](https://shareable.vercel.app/script/${data[0].id}).`
+      let message = `${body.author.author_username} just published their new **${body.type.toLowerCase()}**: [${body.title}](https://shareable.vercel.app/script/${data[0].id}).`
       let discordMessage = {
                'content':message
             }
