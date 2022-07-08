@@ -22,6 +22,17 @@
    function logInPrompt(){
       openModal(LoginModal)
    }
+   let isVisible = false
+   let degrees = 0
+   function clickOnAvatar(){
+      isVisible = !isVisible
+      if(degrees == 90){
+         degrees = 0
+      }else{
+         degrees = 90
+      }
+      document.getElementById('chevron').children[0].style.transform = 'rotate(' + degrees + 'deg)'
+   }
 </script>
 
 <div class="navbar-container">
@@ -33,10 +44,45 @@
       </div>
       <div class="rigth-block">
          {#if $user.email}
-            <button on:click={logOut} class="redBrandButton nav-button">Logout</button>
+            <div class="rightGroup" on:click={clickOnAvatar}>
+               <img class="avatar" src={$user.user_metadata.avatar_url} alt="">
+               <span id="chevron" class="icon icon_navbar">{@html feather.icons['chevron-down'].toSvg()}</span>
+            </div>
          {:else}
             <button on:click={logInPrompt} class="redBrandButton nav-button">Login</button>
          {/if}
       </div>
    </nav>
 </div>
+
+<div id="floating-modal" class:isVisible>
+   <button on:click={logOut} class="redBrandButton nav-button">Logout</button>
+</div>
+
+<style>
+   .rightGroup{
+      /* background-color: #ffffff1a;
+      padding:4px 10px;
+      border-radius: 4px;
+      color:#fff; */
+   }
+   .avatar{
+      height: 21px;
+      border-radius: 50%;
+   }
+   #floating-modal{
+      position: absolute;
+      right: -160px;
+      top:60px;
+      width: 150px;
+      text-align: center;
+      border-radius: 4px;
+      background-color: #333333;
+      transition: all 0.3s ease-in-out;
+      padding-bottom:10px;
+      padding-top:10px ;
+   }
+   .isVisible{
+      right: 10px !important;
+   }
+</style>
