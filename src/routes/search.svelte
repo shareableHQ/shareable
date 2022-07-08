@@ -38,6 +38,7 @@
 </svelte:head>
 
 
+<div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
 <div id="page">
    <form class="searchBar" on:submit|preventDefault={search}>
       <input bind:value={searchParam} class="seachForm" type="text" name="search" id="" placeholder="Search">
@@ -64,6 +65,9 @@
 
 
 <style>
+   .loader{
+      display: none;
+   }
    #page{
       padding-top: 50px;
       padding-left: 50px;

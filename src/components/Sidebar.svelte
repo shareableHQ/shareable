@@ -3,18 +3,20 @@
    import { sidebar } from '$lib/stores.js';
    import { user } from "$lib/stores";
    import { startLoad, endLoad } from '$lib/functions/utils';
-   import { tagStore } from '$lib/stores';
+   import { tagStore, loading } from '$lib/stores';
    let isOpen = false
    $:{
       //console.log($sidebar)
       isOpen = $sidebar
    }
-   function closeSidebar(tag){
+   function closeSidebar(param){
       sidebar.set(false)
       document.getElementsByTagName('body')[0].style.overflow = 'unset'
       startLoad()
-      if(tag){
+      if(param == 'tag'){
          tagStore.set(!$tagStore)
+      }else if(param == 'load'){
+         loading.set(!$loading)
       }
    }
 </script>
@@ -25,10 +27,10 @@
          <span>Sections</span>
        </p>
       <div class="headerLinks">
-         <a on:click={closeSidebar} class="icon" href="/">{@html feather.icons.home.toSvg()} Home</a>
-         <a on:click={closeSidebar} class="icon" href="/search">{@html feather.icons.search.toSvg()} Search</a>
+         <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/">{@html feather.icons.home.toSvg()} Home</a>
+         <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/search">{@html feather.icons.search.toSvg()} Search</a>
          {#if $user.email}
-            <a on:click={closeSidebar} class="icon" href="/import">{@html feather.icons['plus-circle'].toSvg()} Publish from GitHub</a>
+            <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/import">{@html feather.icons['plus-circle'].toSvg()} Publish from GitHub</a>
          {/if}
        </div>
 
@@ -36,8 +38,8 @@
          <span>Browse</span>
        </p>
        <div class="headerLinks">
-         <a on:click={(()=>{closeSidebar('Script')})} class="icon" href="/browse?tag=Script">{@html feather.icons.code.toSvg()} Browse scripts</a>
-         <a on:click={(()=>{closeSidebar('Widget')})} class="icon" href="/browse?tag=Widget">{@html feather.icons.smartphone.toSvg()} Browse widgets</a>
+         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Script">{@html feather.icons.code.toSvg()} Browse scripts</a>
+         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Widget">{@html feather.icons.smartphone.toSvg()} Browse widgets</a>
        </div>
 
        <p class="sidebarHeader">

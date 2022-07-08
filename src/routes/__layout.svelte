@@ -11,6 +11,17 @@
       $user = session.user
     }
   })
+  import { loading } from '$lib/stores';
+  import { browser } from '$app/env';
+  import { endLoad } from '$lib/functions/utils';
+  $:{
+      console.log($loading)
+      if(browser){
+         setTimeout(() => {
+            endLoad()
+         }, 1000);
+      }
+   }
 </script>
 
 <Notifications>

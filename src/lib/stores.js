@@ -7,3 +7,4 @@ export const user = writable(supabase.auth.user() || false);
 export const sidebar = writable(false)
 // Tag
 export const tagStore = writable(true)
+export const loading = writable(false)
