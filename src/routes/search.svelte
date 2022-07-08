@@ -15,15 +15,21 @@
    import feather from 'feather-icons';
    export let results = [], query;
    import ScriptBox from '$components/ScriptBox.svelte';
+   import { Moon } from 'svelte-loading-spinners';
+   let isSearching = false;
+   let hasSearched = false;
 
    let searchParam = query;
    async function search(){
+      isSearching = true
       if(searchParam){
          const { data, error } = await supabase.from('scripts').select('*')
          results = data.filter(element => element.name.toLowerCase().indexOf(searchParam.toLowerCase()) != -1 )
       }else{
          results = []
       }
+      isSearching = false
+      hasSearched = true;
    }
 </script>
 
@@ -37,15 +43,21 @@
       <input bind:value={searchParam} class="seachForm" type="text" name="search" id="" placeholder="Search">
       <button type="submit" class="toolButton searchButton icon">{@html feather.icons['search'].toSvg()}</button>
    </form>
-   {#if results.length > 0}
-   <h2>Search results</h2>
-      <div class="scripts-container">
-         {#each results as script}
-            <ScriptBox script={script} />
-         {/each}
-      </div>
+   {#if isSearching}
+      <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
    {:else}
-   <p class="not_found">No results!</p>
+      {#if results.length > 0}
+         <h2>Search results</h2>
+         <div class="scripts-container">
+            {#each results as script}
+               <ScriptBox script={script} />
+            {/each}
+         </div>
+      {:else}
+         {#if hasSearched}
+            <p class="not_found">No results!</p>
+         {/if}
+      {/if}
    {/if}
 	
 </div>
