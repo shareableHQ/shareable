@@ -7,6 +7,7 @@
   import Sidebar from '../components/Sidebar.svelte';
   import supabase from "$lib/db";
   supabase.auth.onAuthStateChange((event, session) => {
+    console.log(event)
     if(event == 'SIGNED_IN'){
       $user = session.user
     }
