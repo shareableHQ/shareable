@@ -5,6 +5,8 @@
    import supabase from "$lib/db";
    import { openModal } from 'svelte-modals'
    import LoginModal from '../components/LoginModal.svelte';
+   import {fly} from 'svelte/transition'
+   console.log($user)
 
    const logOut = async () => {
       let { error } = await supabase.auth.signOut();
@@ -56,33 +58,48 @@
    </nav>
 </div>
 
-<div id="floating-modal" class:isVisible>
-   <button on:click={logOut} class="redBrandButton nav-button">Logout</button>
+{#if $user && isVisible}
+<div id="floating-modal" class:isVisible in:fly="{{x:200}}" out:fly="{{x:200, duration:800}}">
+   <p id="floating_username">Hi, {$user.user_metadata.user_name}</p>
+   <p id="floating_email">{$user.email}</p>
+   <button on:click={logOut} class=" nav-button" id="floating_button">Logout</button>
 </div>
+{/if}
 
 <style>
-   .rightGroup{
-      /* background-color: #ffffff1a;
-      padding:4px 10px;
-      border-radius: 4px;
-      color:#fff; */
-   }
    .avatar{
       height: 21px;
       border-radius: 50%;
+   }
+   #floating_username{
+      opacity: 0.7;
+      margin-bottom: -6px;
+   }
+   #floating_email{
+      opacity: 0.5;
+      margin-bottom: 10px;
+      font-size: 10.5px;
+   }
+   #floating_button{
+      width: 100px;
+      background-color: #262626;
+   }
+   #floating_button:hover{
+      opacity: 0.7;
    }
    #floating-modal{
       position: absolute;
       right: 10px;
       top:60px;
-      width: 150px;
-      text-align: center;
+      width: 130px;
+      text-align: left;
+      padding-left: 10px;
+      font-size: 14px;
       border-radius: 4px;
       background-color: #333333;
       transition: right 0.3s ease-in-out;
       padding-bottom:10px;
       padding-top:10px;
-      display: none;
    }
    .isVisible{
       display: block !important;

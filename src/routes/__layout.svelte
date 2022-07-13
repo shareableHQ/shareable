@@ -1,3 +1,13 @@
+<script context="module">
+  import supabase from "$lib/db";
+  export async function load(){
+    console.log('hi from load')
+    let isMaintenance = await supabase.from('meta').select('isMaintenance').eq('id', 1);
+    isMaintenance = isMaintenance.data[0].isMaintenance
+    return {props:{isMaintenance}}
+  }
+</script>
+
 <script>
   import '$lib/style/main.css'
   import { user } from "$lib/stores";
@@ -5,7 +15,7 @@
   import Notifications from 'svelte-notifications';
   import Navbar from '../components/Navbar.svelte';
   import Sidebar from '../components/Sidebar.svelte';
-  import supabase from "$lib/db";
+  export let isMaintenance;
   supabase.auth.onAuthStateChange((event, session) => {
     if(event == 'SIGNED_IN'){
       $user = session.user
@@ -33,7 +43,11 @@
 <Notifications>
 <Sidebar />
 <Navbar />
-<slot></slot>
+{#if isMaintenance}
+  <p class="not_found">Website is currently under maintenance. Should be up again in a few moments!<br><br>Sorry!</p>
+{:else}
+  <slot></slot>
+{/if}
 <Modals>
   <div
     slot="backdrop"
