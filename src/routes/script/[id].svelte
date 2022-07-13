@@ -33,6 +33,7 @@
    let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
    import { startLoad } from '$lib/functions/utils';
    import SvelteMarkdown from 'svelte-markdown'
+   import { onMount } from 'svelte';
 
    async function registerDownload(){
       const { data, error } = await supabase.rpc('increment', { row_id:id })
@@ -51,6 +52,14 @@
    if(script){
       path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
    }
+   // Fixing images
+   onMount(()=>{
+      for (let index = 0; index < document.querySelectorAll('img').length; index++) {
+         document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/main/`)
+         document.querySelectorAll('img')[index].style.maxWidth = '90vw';
+      }
+   })
+      
 </script>
 
 <svelte:head>
