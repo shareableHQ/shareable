@@ -30,7 +30,7 @@
 </script>
 
 <svelte:head>
-   <title>Shareable | Home</title>
+   <title>Shareable | Browse {tag.toLowerCase()}s</title>
 </svelte:head>
 
 <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
