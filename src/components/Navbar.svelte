@@ -6,7 +6,6 @@
    import { openModal } from 'svelte-modals'
    import LoginModal from '../components/LoginModal.svelte';
    import {fly} from 'svelte/transition'
-   console.log($user)
 
    const logOut = async () => {
       let { error } = await supabase.auth.signOut();

@@ -6,7 +6,6 @@
    import { tagStore, loading } from '$lib/stores';
    let isOpen = false
    $:{
-      //console.log($sidebar)
       isOpen = $sidebar
    }
    function closeSidebar(param){

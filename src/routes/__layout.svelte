@@ -1,7 +1,6 @@
 <script context="module">
   import supabase from "$lib/db";
   export async function load(){
-    console.log('hi from load')
     let isMaintenance = await supabase.from('meta').select('isMaintenance').eq('id', 1);
     isMaintenance = isMaintenance.data[0].isMaintenance
     return {props:{isMaintenance}}
