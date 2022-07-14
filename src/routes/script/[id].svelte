@@ -55,7 +55,8 @@
    // Fixing images
    onMount(()=>{
       for (let index = 0; index < document.querySelectorAll('img').length; index++) {
-         document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/main/`)
+         document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/main/`)
+         document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('https://shareable.vercel.app/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/main/`)
          document.querySelectorAll('img')[index].style.maxWidth = '90vw';
       }
    })
