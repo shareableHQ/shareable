@@ -202,36 +202,29 @@ textarea {
 /* MOBILE */
 @media (max-width: 550px) {
   .form, .desc {
-    width: 90% !important;
+    width: 100% !important;
   }
-
   .themed {
     width: 88vw;
   }
-
   .textarea {
     width: 88% !important;
   }
-
   .description-editor {
     flex-direction: column;
     gap: 0px;
   }
-
   .info {
     grid-template-columns: repeat(1, 100%) !important;
     gap: 40px;
   }
-
   .scripts-container {
     justify-content: center;
   }
-
   .sidebar, .sidebar-fake {
     left: -100vw !important;
     width: 100vw !important;
   }
-
   #title {
     display: none;
   }
@@ -325,6 +318,10 @@ nav > div {
 
 .desc a {
   color: #a1c4fd;
+}
+
+.desc {
+  word-wrap: break-word;
 }
 
 /* SIDEBAR */
