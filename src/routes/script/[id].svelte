@@ -131,12 +131,6 @@
 
 
 <style>
-   .desc{
-      word-wrap: break-word;
-   }
-   code{
-      background-color: red;
-   }
    .loader{
       display: none;
    }
