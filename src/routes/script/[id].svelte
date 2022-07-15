@@ -34,7 +34,6 @@
    import { startLoad } from '$lib/functions/utils';
    import SvelteMarkdown from 'svelte-markdown'
    import { onMount } from 'svelte';
-
    async function registerDownload(){
       const { data, error } = await supabase.rpc('increment', { row_id:id })
       document.getElementById('invisible-download').click()
@@ -52,6 +51,7 @@
    if(script){
       path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
    }
+
    // Fixing images
    onMount(()=>{
       let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path}`, '').replace('/', '')
@@ -60,10 +60,14 @@
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('https://shareable.vercel.app/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('https://shareable.vercel.app/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
+         console.clear()
          document.querySelectorAll('img')[index].style.maxWidth = '100%';
       }
+      // highlight.js
+      document.querySelectorAll('pre code').forEach((el)=>{
+         hljs.highlightElement(el);
+      })
    })
-      
 </script>
 
 <svelte:head>
@@ -127,6 +131,12 @@
 
 
 <style>
+   .desc{
+      word-wrap: break-word;
+   }
+   code{
+      background-color: red;
+   }
    .loader{
       display: none;
    }
