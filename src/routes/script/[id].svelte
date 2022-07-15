@@ -54,7 +54,7 @@
 
    // Fixing images
    onMount(()=>{
-      let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path}`, '').replace('/', '')
+      let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path.replace(' ', '%20')}`, '').replace('/', '')
       for (let index = 0; index < document.querySelectorAll('img').length; index++) {
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
