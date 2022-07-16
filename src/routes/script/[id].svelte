@@ -60,7 +60,10 @@
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('https://shareable.vercel.app/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('https://shareable.vercel.app/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
-         console.clear()
+         if(document.querySelectorAll('img')[index].src.indexOf('blob') != -1){
+            document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src + '?raw=true'
+         }
+         //console.clear()
          document.querySelectorAll('img')[index].style.maxWidth = '100%';
       }
       // highlight.js
