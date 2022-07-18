@@ -37,8 +37,9 @@
          <span>Browse</span>
        </p>
        <div class="headerLinks">
-         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Script">{@html feather.icons.code.toSvg()} Browse scripts</a>
-         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Widget">{@html feather.icons.smartphone.toSvg()} Browse widgets</a>
+         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Script">{@html feather.icons.code.toSvg()} Scripts</a>
+         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Home Screen Widget">{@html feather.icons.grid.toSvg()} Home screen widgets</a>
+         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Lock Screen Widget">{@html feather.icons.smartphone.toSvg()} Lock screen widgets</a>
        </div>
 
        <p class="sidebarHeader">
