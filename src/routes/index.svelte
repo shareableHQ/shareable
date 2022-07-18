@@ -30,6 +30,9 @@
 </script>
 
 <svelte:head>
+   <meta property="og:title" content="Shareable" />
+  	<meta property="og:description" content="A place for sharing and browsing Scriptable scripts and widgets."/>
+  	<meta property="og:url" content="https://shareable.vercel.app" />
    <title>Shareable | Home</title>
 </svelte:head>
 

@@ -54,6 +54,7 @@
 
    // Fixing images
    onMount(()=>{
+      console.log(script)
       let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path.replace(' ', '%20')}`, '').replace('/', '')
       for (let index = 0; index < document.querySelectorAll('img').length; index++) {
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
@@ -71,10 +72,14 @@
          hljs.highlightElement(el);
       })
    })
+   let url = `https://shareable.vercel.app/script/${script.id}`
 </script>
 
 <svelte:head>
    <title>{title}</title>
+   <meta property="og:title" content={title} />
+  	<meta property="og:description" content={script.desc}/>
+  	<meta property="og:url" content={url} />
 </svelte:head>
 
 <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
