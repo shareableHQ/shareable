@@ -104,7 +104,7 @@
             <input type="text" class="form" placeholder="Script name" required="required" bind:value={name}>
             <p class="label">Choose a name for your script.</p>
 
-            <div class="themed"><Select placeholder="Select type" on:select={handleSelect2} items={['Script', 'Widget']}></Select></div>
+            <div class="themed"><Select placeholder="Select type" on:select={handleSelect2} items={['Script', 'Home Screen Widget', 'Lock Screen Widget']}></Select></div>
             <p class="label">Choose the type of your project.</p>
          </div>
          <div>

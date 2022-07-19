@@ -112,7 +112,7 @@
          </form>
       {:else if parameter == 'Type'}
          <form on:submit|preventDefault={invokeUpdateType}>
-            <div class="themed"><Select value={type} placeholder="Select type" on:select={handleSelect2} items={['Script', 'Widget']}></Select></div><br>
+            <div class="themed"><Select value={type} placeholder="Select type" on:select={handleSelect2} items={['Script', 'Home Screen Widget', 'Lock Screen Widget']}></Select></div><br>
             <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
          </form>
       {:else if parameter == 'Remove script'}
