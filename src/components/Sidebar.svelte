@@ -40,6 +40,7 @@
          <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Script">{@html feather.icons.code.toSvg()} Scripts</a>
          <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Home Screen Widget">{@html feather.icons.grid.toSvg()} Home screen widgets</a>
          <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Lock Screen Widget">{@html feather.icons.smartphone.toSvg()} Lock screen widgets</a>
+         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=All">{@html feather.icons.folder.toSvg()} All widgets</a>
        </div>
 
        <p class="sidebarHeader">

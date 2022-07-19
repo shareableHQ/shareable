@@ -2,11 +2,23 @@
    import supabase from '$lib/db';
    export async function load({url}){
       const tag = url.searchParams.get('tag')
-      let {data, error} = await supabase.from('scripts').select('*').eq('type', tag)
-      data.sort((a, b)=>{
-            return a.id - b.id
-         })         
-      data = data.reverse()
+      let data
+      if(tag != 'All'){
+         data = await supabase.from('scripts').select('*').eq('type', tag)
+         data = data.data
+         data.sort((a, b)=>{
+               return a.id - b.id
+            })         
+         data = data.reverse()
+      }else{
+         data = await supabase.from('scripts').select('*').not('type', 'eq', 'Script')
+         console.log(data)
+         data = data.data
+         data.sort((a, b)=>{
+               return a.id - b.id
+            })         
+         data = data.reverse()
+      }
       return {props:{data, tag}}
    }
 </script>
@@ -30,12 +42,20 @@
 </script>
 
 <svelte:head>
-   <title>Shareable | Browse {tag.toLowerCase()}s</title>
+   {#if tag != 'All'}
+      <title>Shareable | Browse {tag.toLowerCase()}s</title>
+   {:else}
+      <title>Shareable | Browse all widgets</title>
+   {/if}
 </svelte:head>
 
 <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
 <div id="page">
-   <h1>Browse {tag.toLowerCase()}s</h1>
+   {#if tag != 'All'}
+      <h1>Browse {tag.toLowerCase()}s</h1>
+   {:else}
+      <h1>Browse all widgets</h1>
+   {/if}
    <div class="scripts-container">
       {#each data as script}
          <ScriptBox script={script} />
