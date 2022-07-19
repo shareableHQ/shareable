@@ -12,7 +12,7 @@
    const logOut = async () => {
       let { error } = await supabase.auth.signOut();
       $user = false;
-      addNotification({ text: 'See you later!', position: 'top-left' })
+      addNotification({ text: 'See you later!', position: 'top-right' })
    };
    function openMenu(){
       if($sidebar){
