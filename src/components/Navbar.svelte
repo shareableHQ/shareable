@@ -6,10 +6,13 @@
    import { openModal } from 'svelte-modals'
    import LoginModal from '../components/LoginModal.svelte';
    import {fly} from 'svelte/transition'
+   import { getNotificationsContext } from 'svelte-notifications';
+   const { addNotification } = getNotificationsContext();
 
    const logOut = async () => {
       let { error } = await supabase.auth.signOut();
       $user = false;
+      addNotification({ text: 'See you later!', position: 'top-left' })
    };
    function openMenu(){
       if($sidebar){
