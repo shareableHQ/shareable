@@ -87,7 +87,7 @@
    <div class="script_page">
       <Breadcrumbs path={path} />
       <h1>{script.name}</h1>
-      <h2 class="author">Created by <span id="author_name">{script.author_name}</span></h2>
+      <h2 class="author">Created by <a href={'/user/' + script.author_id} id="author_name">{script.author_name}</a></h2>
       <br>
       <a href='' on:click={registerDownload} class="icon download scriptToolButton">{@html feather.icons['arrow-down'].toSvg()} Download</a>
       <a href={link} download={script.repo.filename.split('.')[0]} id="invisible-download" style="display=none;"> </a>

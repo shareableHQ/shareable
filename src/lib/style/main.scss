@@ -21,7 +21,7 @@ body{
    padding-top: 30vh;
    font-size: 25px;
 }
-.loader{
+.loader, .loader_error{
    display: flex;
    justify-content: center;
    padding-top: 250px;

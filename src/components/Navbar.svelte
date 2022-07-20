@@ -1,11 +1,10 @@
 <script>
    import feather from 'feather-icons';
-   import { goto } from "$app/navigation";
    import { user, sidebar } from "$lib/stores";
    import supabase from "$lib/db";
    import { openModal } from 'svelte-modals'
    import LoginModal from '../components/LoginModal.svelte';
-   import {fly} from 'svelte/transition'
+   import { fly } from 'svelte/transition'
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
 
