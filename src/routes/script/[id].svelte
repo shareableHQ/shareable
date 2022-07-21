@@ -54,7 +54,6 @@
 
    // Fixing images
    onMount(()=>{
-      console.log(script)
       let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path.replace(' ', '%20')}`, '').replace('/', '')
       for (let index = 0; index < document.querySelectorAll('img').length; index++) {
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
@@ -73,6 +72,9 @@
       })
    })
    let url = `https://shareable.vercel.app/script/${script.id}`
+   var options = {
+      'mangle':false
+   }
 </script>
 
 <svelte:head>
@@ -118,7 +120,7 @@
             <h2>Description</h2>
             {#if script.repo.readme_path}
                <div class="desc">
-                  <SvelteMarkdown {source} />
+                  <SvelteMarkdown source={source} options={options} />
                </div>
             {:else}
                <p>No description provided!</p>
