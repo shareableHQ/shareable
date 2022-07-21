@@ -1,11 +1,10 @@
 <script>
    import feather from 'feather-icons';
-   import { goto } from "$app/navigation";
    import { user, sidebar } from "$lib/stores";
    import supabase from "$lib/db";
    import { openModal } from 'svelte-modals'
    import LoginModal from '../components/LoginModal.svelte';
-   import {fly} from 'svelte/transition'
+   import { fly } from 'svelte/transition'
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
 
@@ -61,49 +60,16 @@
 </div>
 
 {#if $user && isVisible}
-<div id="floating-modal" class:isVisible in:fly="{{x:200}}" out:fly="{{x:200, duration:800}}">
-   <p id="floating_username">Hi, {$user.user_metadata.user_name}</p>
-   <p id="floating_email">{$user.email}</p>
-   <button on:click={logOut} class=" nav-button" id="floating_button">Logout</button>
-</div>
+   <div id="floating-modal" class:isVisible in:fly="{{x:200}}" out:fly="{{x:200, duration:800}}">
+      <p id="floating_username">Hi, <a class="profile_link" on:click={()=>{isVisible = false}} href={'/user/' + $user.id}>{$user.user_metadata.user_name}</a></p>
+      <p id="floating_email">{$user.email}</p>
+      <button on:click={logOut} class=" nav-button" id="floating_button">Logout</button>
+   </div>
 {/if}
 
 <style>
    .avatar{
       height: 21px;
       border-radius: 50%;
-   }
-   #floating_username{
-      opacity: 0.7;
-      margin-bottom: -6px;
-   }
-   #floating_email{
-      opacity: 0.5;
-      margin-bottom: 10px;
-      font-size: 10.5px;
-   }
-   #floating_button{
-      width: 100px;
-      background-color: #262626;
-   }
-   #floating_button:hover{
-      opacity: 0.7;
-   }
-   #floating-modal{
-      position: absolute;
-      right: 10px;
-      top:60px;
-      width: 130px;
-      text-align: left;
-      padding-left: 10px;
-      font-size: 14px;
-      border-radius: 4px;
-      background-color: #333333;
-      transition: right 0.3s ease-in-out;
-      padding-bottom:10px;
-      padding-top:10px;
-   }
-   .isVisible{
-      display: block !important;
    }
 </style>

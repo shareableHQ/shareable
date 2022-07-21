@@ -314,6 +314,11 @@ nav > div {
 
 #author_name {
   color: #a1c4fd;
+  text-decoration: none;
+}
+
+#author_name:hover {
+  text-decoration: underline;
 }
 
 .desc a {
@@ -387,6 +392,54 @@ span {
   z-index: 4 !important;
 }
 
+.profile_link {
+  color: unset;
+  text-decoration: none;
+}
+
+.profile_link:hover {
+  opacity: 0.7;
+}
+
+#floating_username {
+  opacity: 0.7;
+  margin-bottom: -6px;
+}
+
+#floating_email {
+  opacity: 0.5;
+  margin-bottom: 10px;
+  font-size: 10.5px;
+}
+
+#floating_button {
+  width: 100px;
+  background-color: #262626;
+}
+
+#floating_button:hover {
+  opacity: 0.7;
+}
+
+#floating-modal {
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  width: 130px;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #333333;
+  transition: right 0.3s ease-in-out;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.isVisible {
+  display: block !important;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #262626;
@@ -402,7 +455,7 @@ body {
   font-size: 25px;
 }
 
-.loader {
+.loader, .loader_error {
   display: flex;
   justify-content: center;
   padding-top: 250px;

@@ -30,6 +30,7 @@
          <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/search">{@html feather.icons.search.toSvg()} Search</a>
          {#if $user.email}
             <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/import">{@html feather.icons['plus-circle'].toSvg()} Publish from GitHub</a>
+            <a on:click={(()=>{closeSidebar('load')})} class="icon" href={'/user/' + $user.id}>{@html feather.icons['user'].toSvg()} Profile</a>
          {/if}
        </div>
 
