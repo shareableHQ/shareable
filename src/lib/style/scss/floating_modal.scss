@@ -1,0 +1,40 @@
+.profile_link{
+   color: unset;
+   text-decoration: none;
+}
+.profile_link:hover{
+   opacity: 0.7;
+}
+#floating_username{
+   opacity: 0.7;
+   margin-bottom: -6px;
+}
+#floating_email{
+   opacity: 0.5;
+   margin-bottom: 10px;
+   font-size: 10.5px;
+}
+#floating_button{
+   width: 100px;
+   background-color: #262626;
+}
+#floating_button:hover{
+   opacity: 0.7;
+}
+#floating-modal{
+   position: absolute;
+   right: 10px;
+   top:60px;
+   width: 130px;
+   text-align: left;
+   padding-left: 10px;
+   font-size: 14px;
+   border-radius: 4px;
+   background-color: #333333;
+   transition: right 0.3s ease-in-out;
+   padding-bottom:10px;
+   padding-top:10px;
+}
+.isVisible{
+   display: block !important;
+}

@@ -2,7 +2,6 @@
    import { Moon } from 'svelte-loading-spinners';
    import ScriptBox from '$components/ScriptBox.svelte';
    import { user } from '$lib/stores';
-   console.log($user)
    export let data;
    export let user_metadata
    let username, title;
