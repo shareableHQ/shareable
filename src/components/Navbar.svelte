@@ -60,14 +60,21 @@
 </div>
 
 {#if $user && isVisible}
-<div id="floating-modal" class:isVisible in:fly="{{x:200}}" out:fly="{{x:200, duration:800}}">
-   <p id="floating_username">Hi, {$user.user_metadata.user_name}</p>
-   <p id="floating_email">{$user.email}</p>
-   <button on:click={logOut} class=" nav-button" id="floating_button">Logout</button>
-</div>
+   <div id="floating-modal" class:isVisible in:fly="{{x:200}}" out:fly="{{x:200, duration:800}}">
+      <p id="floating_username">Hi, <a class="profile_link" on:click={()=>{isVisible = false}} href={'/user/' + $user.id}>{$user.user_metadata.user_name}</a></p>
+      <p id="floating_email">{$user.email}</p>
+      <button on:click={logOut} class=" nav-button" id="floating_button">Logout</button>
+   </div>
 {/if}
 
 <style>
+   .profile_link{
+      color: unset;
+      text-decoration: none;
+   }
+   .profile_link:hover{
+      opacity: 0.7;
+   }
    .avatar{
       height: 21px;
       border-radius: 50%;
