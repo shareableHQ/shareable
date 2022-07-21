@@ -108,7 +108,7 @@
          
          <div class="info_child">
             <h2>Informations</h2>
-            <p class="info-p"><span class="info-title">Author:</span> {script.author_name}</p>
+            <p class="info-p"><span class="info-title">Author:</span> <a id="info-a" href={'/user/' + script.author_id}>{script.author_name}</a></p>
             <p class="info-p"><span class="info-title">Downloads:</span> {script.downloads}</p>
             <p class="info-p"><span class="info-title">Type:</span> {script.type}</p>
             <p class="info-p"><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
@@ -139,6 +139,13 @@
 
 
 <style>
+   #info-a{
+      color:white;
+      text-decoration: underline;
+   }
+   #info-a:hover{
+      opacity: 0.7;
+   }
    .loader{
       display: none;
    }
