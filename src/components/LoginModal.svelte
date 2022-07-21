@@ -10,7 +10,7 @@
       let { user: userDetails, error } = await supabase.auth.signIn({
          provider:'github'
       },{
-         scopes: 'repo'
+         scopes: 'public_repo'
       });
    };
 </script>
