@@ -1,46 +1,23 @@
-<script context="module">
-   import supabase from '$lib/db';
-   export async function load({params}){
-      const id = params.id
-      const { data, error } = await supabase.from('scripts').select('*').eq('id', id)
-      let script = data[0]
-      let file, readme;
-      if(script){
-         let fileReq = await fetch(script.download_url)
-         file = await fileReq.text()
-      }
-      if(data.length > 0){
-         if(script.repo.readme_path){
-            let readmeReq = await fetch(script.repo.readme_download_url)
-            readme = await readmeReq.text()
-         }
-      }
-      return {props: {id, script, file, readme}}
-   }
-</script>
-
 <script>
+   // Import
    import feather from 'feather-icons';
    import { Moon } from 'svelte-loading-spinners';
+   import { user } from "$lib/stores";
+   import Breadcrumbs from '$components/Breadcrumbs.svelte';
+   import { startLoad } from '$lib/functions/utils';
+   import SvelteMarkdown from 'svelte-markdown';
+   import { onMount } from 'svelte';
+   // Props
    export let id;
    export let script;
    export let file;
    export let readme;
+   // Constants
    const source = `${readme}`
-   import { user } from "$lib/stores";
-   import Breadcrumbs from '$components/Breadcrumbs.svelte'
-   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+   // Link and title
    let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
-   import { startLoad } from '$lib/functions/utils';
-   import SvelteMarkdown from 'svelte-markdown'
-   import { onMount } from 'svelte';
-   async function registerDownload(){
-      const { data, error } = await supabase.rpc('increment', { row_id:id })
-      document.getElementById('invisible-download').click()
-      script.downloads = script.downloads + 1
-   }
-   let title;
-   let path = []
+   let title, path = [];
    if(!script){
       title = 'Nothing found here!'
    }else{
@@ -52,6 +29,11 @@
       path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
    }
 
+   async function registerDownload(){
+      const { data, error } = await supabase.rpc('increment', { row_id:id })
+      document.getElementById('invisible-download').click()
+      script.downloads = script.downloads + 1
+   }
    // Fixing images
    onMount(()=>{
       let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path.replace(' ', '%20')}`, '').replace('/', '')
@@ -71,7 +53,9 @@
          hljs.highlightElement(el);
       })
    })
+   
    let url = `https://shareable.vercel.app/script/${script.id}`
+   // svelte-markdown options
    var options = {
       'mangle':false
    }

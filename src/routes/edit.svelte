@@ -24,7 +24,7 @@
    import { goto } from "$app/navigation";
    import { browser } from '$app/env'
    import { user } from "$lib/stores";
-   import { updateTitle, updateDesc, updateType, removeScript } from '../lib/functions/userActions';
+   import { updateTitle, updateDesc, updateType, removeScript } from '../lib/functions/editScript';
    import Select from 'svelte-select';
    import feather from 'feather-icons';
    import Breadcrumbs from '$components/Breadcrumbs.svelte'

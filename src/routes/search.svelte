@@ -1,21 +1,10 @@
-<script context="module">
-   import supabase from '$lib/db';
-   export async function load({url}){
-      const query = url.searchParams.get('q')
-      let results = []
-      if(query){
-         const { data, error } = await supabase.from('scripts').select('*')
-         results = data.filter(element => element.name.toLowerCase().indexOf(query.toLowerCase()) != -1 )
-      }
-      return {props:{results, query}}
-   }
-</script>
-
 <script>
    import feather from 'feather-icons';
-   export let results = [], query;
    import ScriptBox from '$components/ScriptBox.svelte';
    import { Moon } from 'svelte-loading-spinners';
+   import supabase from '$lib/db';
+
+   export let results = [], query;
    let isSearching = false;
    let hasSearched = false;
 

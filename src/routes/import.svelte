@@ -1,5 +1,5 @@
 <script context="module">
-   import { getUserRepo } from '../lib/functions/userActions';
+   import { getUserRepo } from '../lib/functions/utils';
    import supabase from '$lib/db';
    export async function load(){
       let items = []
