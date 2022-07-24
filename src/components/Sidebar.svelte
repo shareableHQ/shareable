@@ -1,5 +1,5 @@
 <script>
-   import { Home, Search, User, PlusCircle, Code, LayoutGrid, Smartphone, Folder, Rss, Github, Users } from 'lucide-svelte'
+   import { Home, Search, User, PlusCircle, Code, LayoutGrid, Smartphone, Folder, Rss, Github, Users, Star } from 'lucide-svelte'
    import { sidebar } from '$lib/stores.js';
    import { user } from "$lib/stores";
    import { startLoad, endLoad } from '$lib/functions/utils';
@@ -30,9 +30,18 @@
          <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/search"><Search /> Search</a>
          {#if $user.email}
             <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/import"><PlusCircle /> Publish from GitHub</a>
-            <a on:click={(()=>{closeSidebar('load')})} class="icon" href={'/user/' + $user.id}><User /> Profile</a>
          {/if}
        </div>
+
+       {#if $user}
+         <p class="sidebarHeader">
+            <span>Profile</span>
+         </p>
+         <div class="headerLinks">
+            <a on:click={(()=>{closeSidebar('load')})} class="icon" href={'/user/' + $user.id}><User /> Profile</a>
+            <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/user/stars" ><Star /> Starred</a>
+         </div>
+      {/if}
 
        <p class="sidebarHeader">
          <span>Browse</span>

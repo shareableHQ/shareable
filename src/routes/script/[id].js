@@ -2,7 +2,7 @@ import supabase from '$lib/db';
 
 export async function get({ params }) {
    const id = params.id
-   const { data, error } = await supabase.from('scripts').select('*').eq('id', id)
+   var { data, error } = await supabase.from('scripts').select('*').eq('id', id)
    let script = data[0];
    let file, readme;
    if(script){
@@ -15,13 +15,19 @@ export async function get({ params }) {
          readme = await readmeReq.text()
       }
    }
+   var { data, error } = await supabase.from('stars').select('*').eq('script_starred', id)
+   let starsObj = data
+   let stars = data.length
+
 
    return {
       body: {
          id: id,
          script: script,
          file: file,
-         readme: readme
+         readme: readme,
+         stars: stars,
+         starsObj: starsObj
       }
    }
 }
