@@ -1,6 +1,6 @@
 <script>
    import { Moon } from 'svelte-loading-spinners';
-   import feather from 'feather-icons';
+   import { Search } from 'lucide-svelte';
    import Footer from '$components/Footer.svelte';
    import ScriptBox from '$components/ScriptBox.svelte';
 
@@ -28,7 +28,7 @@
    <h1 id="title">Welcome to Shareable!</h1>
    <form class="searchBar" on:submit|preventDefault={search}>
       <input bind:value={searchParam} class="seachForm" type="text" name="search" id="" placeholder="Search">
-      <button type="submit" class="toolButton searchButton icon">{@html feather.icons['search'].toSvg()}</button>
+      <button type="submit" class="toolButton searchButton icon"><Search /></button>
    </form>
    <h2>Recent</h2>
    <div class="scripts-container">

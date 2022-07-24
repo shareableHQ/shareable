@@ -26,7 +26,7 @@
    import { user } from "$lib/stores";
    import { updateTitle, updateDesc, updateType, removeScript } from '../lib/functions/editScript';
    import Select from 'svelte-select';
-   import feather from 'feather-icons';
+   import { Trash2 } from 'lucide-svelte';
    import Breadcrumbs from '$components/Breadcrumbs.svelte'
    export let scriptID
    export let error
@@ -116,7 +116,7 @@
             <button id="submitButton" type="submit" class="toolButton redBrandButton">Edit</button>
          </form>
       {:else if parameter == 'Remove script'}
-      <div class="contents"><button on:click={invokeRemoveScript} class="icon toolButton redBrandButton">{@html feather.icons.trash.toSvg()} Delete</button></div>
+      <div class="contents"><button on:click={invokeRemoveScript} class="icon toolButton redBrandButton"><Trash2 /> Delete</button></div>
       {/if} 
 </div>
 </div>

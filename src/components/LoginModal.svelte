@@ -1,9 +1,7 @@
 <script>
    import { closeModal } from 'svelte-modals'
-   import feather from 'feather-icons';
-   import { goto } from "$app/navigation";
+   import { Github } from 'lucide-svelte'
    import supabase from "$lib/db";
-   import { user } from "$lib/stores";
    export let isOpen
    
    const logIn = async () => {
@@ -19,7 +17,7 @@
 <div role="dialog" class="modal">
    <div class="contents">
       <h2>Login with GitHub</h2>
-      <button on:click={logIn} class="icon toolButton redBrandButton">{@html feather.icons.github.toSvg()} Sign in</button>
+      <button on:click={logIn} class="icon toolButton redBrandButton"><Github /> Sign in</button>
       <div class="actions">
       <button class="toolButton" on:click={closeModal}>Back</button>
       </div>

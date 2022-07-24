@@ -1,5 +1,5 @@
 <script>
-   import feather from 'feather-icons';
+   import { Search } from 'lucide-svelte';
    import ScriptBox from '$components/ScriptBox.svelte';
    import { Moon } from 'svelte-loading-spinners';
    import supabase from '$lib/db';
@@ -31,7 +31,7 @@
 <div id="page">
    <form class="searchBar" on:submit|preventDefault={search}>
       <input bind:value={searchParam} class="seachForm" type="text" name="search" id="" placeholder="Search">
-      <button type="submit" class="toolButton searchButton icon">{@html feather.icons['search'].toSvg()}</button>
+      <button type="submit" class="toolButton searchButton icon"><Search /></button>
    </form>
    {#if isSearching}
       <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
