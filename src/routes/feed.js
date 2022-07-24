@@ -12,7 +12,7 @@ export async function get() {
 
    let feed = new RSS({
       title: 'Shareable feed',
-      feed_url: 'https://shareable.vercel.app/feed.xml',
+      feed_url: 'https://shareable.vercel.app/feed',
       site_url: 'https://shareable.vercel.app',
       image_url: 'https://shareable.vercel.app/logo.png'
    })
