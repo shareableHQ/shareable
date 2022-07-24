@@ -11,7 +11,7 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
-    "svelte": "^3.44.0",
+    "svelte": "^3.49.0",
     "svelte-loading-spinners": "^0.1.7"
   },
   "type": "module",
