@@ -7,6 +7,7 @@
    import { startLoad } from '$lib/functions/utils';
    import SvelteMarkdown from 'svelte-markdown';
    import { onMount } from 'svelte';
+   import supabase from '$lib/db';
    // Props
    export let id;
    export let script;
