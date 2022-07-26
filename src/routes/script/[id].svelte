@@ -10,6 +10,7 @@
    import { star, unstar, report } from '$lib/functions/scriptActions';
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
+   import supabase from '$lib/db';
    // Props
    export let id;
    export let script;
