@@ -100,7 +100,11 @@
    }
    async function invokeReport(){
       let message = window.prompt('Why are you reporting this script?')
-      if(message){
+      if(message == null){
+         
+      }else if(message.trim().length == 0){
+         addNotification({text:'Please tell us why are you reporting the script by inserting a message in the prompt!', position:'top-center', removeAfter:'3000', type:'warning'})
+      }else{
          let error = await report(script.id, $user.id, $user.user_metadata.user_name, message)
          if(error){
             addNotification({ text: 'Something went wrong!', position: 'top-right', removeAfter:'3000', type: 'danger' })
@@ -108,8 +112,6 @@
             addNotification({text: 'Report sent! Thank you!', position: 'top-center', removeAfter: '3000', type: 'success'})
             isReported = true
          }
-      }else{
-         addNotification({text:'Please tell us why are you reporting the script by inserting a message in the prompt!', position:'top-center', removeAfter:'3000', type:'warning'})
       }
    }
 </script>
