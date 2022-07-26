@@ -11,7 +11,6 @@
    let starred = [];
    let starredIDs = []
    data.forEach(star => {
-      console.log($user.id == star.stargazer)
       if(star.stargazer == $user.id){ starredIDs.push(star.script_starred) }
    });
    starredIDs = starredIDs.reverse()

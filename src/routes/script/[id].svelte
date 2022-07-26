@@ -7,7 +7,7 @@
    import { startLoad } from '$lib/functions/utils';
    import SvelteMarkdown from 'svelte-markdown';
    import { onMount } from 'svelte';
-   import { star, unstar } from '$lib/functions/scriptActions';
+   import { star, unstar, report } from '$lib/functions/scriptActions';
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
    // Props
@@ -17,12 +17,19 @@
    export let readme;
    export let stars;
    export let starsObj;
-   // Looking if script was starred by user
+   export let reports;
+   // Looking if script was starred by user or if a report was made by the user
    let isStarred = false;
+   let isReported = false;
    if($user){
       starsObj.forEach(element => {
-         if(element.stargazer == $user.id){ isStarred = true }
+         if(element.stargazer == $user.id) isStarred = true 
       });
+      reports.forEach(element =>{
+         if(element.author_id == $user.id) {
+            isReported = true
+         }
+      })
    }
    // Constants
    const source = `${readme}`
@@ -46,8 +53,8 @@
       document.getElementById('invisible-download').click()
       script.downloads = script.downloads + 1
    }
-   // Fixing images
    onMount(()=>{
+      // Fixing images
       let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path.replace(' ', '%20')}`, '').replace('/', '')
       for (let index = 0; index < document.querySelectorAll('img').length; index++) {
          document.querySelectorAll('img')[index].src = document.querySelectorAll('img')[index].src.replace('http://localhost:3000/script/', `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`)
@@ -91,6 +98,20 @@
          stars -= 1
       }
    }
+   async function invokeReport(){
+      let message = window.prompt('Why are you reporting this script?')
+      if(message){
+         let error = await report(script.id, $user.id, $user.user_metadata.user_name, message)
+         if(error){
+            addNotification({ text: 'Something went wrong!', position: 'top-right', removeAfter:'3000', type: 'danger' })
+         }else{
+            addNotification({text: 'Report sent! Thank you!', position: 'top-center', removeAfter: '3000', type: 'success'})
+            isReported = true
+         }
+      }else{
+         addNotification({text:'Please tell us why are you reporting the script by inserting a message in the prompt!', position:'top-center', removeAfter:'3000', type:'warning'})
+      }
+   }
 </script>
 
 <svelte:head>
@@ -124,7 +145,11 @@
                {:else}
                   <button on:click={invokeUnstar} class="icon star scriptToolButton" ><Star fill="#333"/> Unstar</button>
                {/if}
-               <button class="icon report scriptToolButton"><AlertTriangle /> Report</button>
+               {#if !isReported}
+                  <button id="reportButton" on:click={invokeReport} class="icon report scriptToolButton"><AlertTriangle /> Report</button>
+               {:else}
+                  <button disabled id="reportButton" on:click={invokeReport} class="icon report scriptToolButton isReported"><AlertTriangle /> Report</button>
+               {/if}
             </div>
          {/if}
       {/if}
@@ -165,6 +190,10 @@
 
 
 <style>
+   .isReported{
+      opacity: 0.6;
+      cursor: not-allowed;
+   }
    .tag{
       background-color: #FFE6771a;
    }

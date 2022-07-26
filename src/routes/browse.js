@@ -12,7 +12,6 @@ export async function get({ url }) {
       data = data.reverse()
    }else{
       data = await supabase.from('scripts').select('*').not('type', 'eq', 'Script')
-      console.log(data)
       data = data.data
       data.sort((a, b)=>{
             return a.id - b.id

@@ -17,3 +17,15 @@ export async function unstar(scriptID, userID) {
       return error
    }
 }
+
+export async function report(scriptID, userID, username, message) {
+   const { data, error } = await supabase.from('reports').insert([{
+      author_id: userID,
+      author_username: username,
+      script: scriptID,
+      message: message
+   }])
+   if (error) {
+      return error
+   }
+}

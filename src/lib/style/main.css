@@ -388,7 +388,7 @@ span {
   line-height: 1.5em;
 }
 
-.position-top-right {
+.position-top-right, .position-top-center {
   z-index: 4 !important;
 }
 

@@ -19,6 +19,9 @@ export async function get({ params }) {
    let starsObj = data
    let stars = data.length
 
+   var { data, error } = await supabase.from('reports').select('*').eq('script', id)
+   let reports = data
+
 
    return {
       body: {
@@ -27,7 +30,8 @@ export async function get({ params }) {
          file: file,
          readme: readme,
          stars: stars,
-         starsObj: starsObj
+         starsObj: starsObj,
+         reports: reports
       }
    }
 }
