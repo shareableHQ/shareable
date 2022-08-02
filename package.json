@@ -17,7 +17,7 @@
   "type": "module",
   "dependencies": {
     "@supabase/supabase-js": "^1.35.2",
-    "feather-icons": "^4.29.0",
+    "lucide-svelte": "^0.83.0",
     "octokit": "^1.7.1",
     "rss": "^1.2.2",
     "svelte-markdown": "^0.2.2",

@@ -282,7 +282,7 @@ nav > div {
 }
 
 #buttonsBar {
-  margin-top: 25px;
+  margin-top: 15px;
   margin-bottom: 40px;
 }
 
@@ -388,7 +388,7 @@ span {
   line-height: 1.5em;
 }
 
-.position-top-right {
+.position-top-right, .position-top-center {
   z-index: 4 !important;
 }
 
