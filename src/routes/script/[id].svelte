@@ -142,7 +142,7 @@
          <br>
          {#if $user.id != script.author_id}
             <div id="buttonsBar">
-               <button class="icon review scriptToolButton"><MessageSquare /> Review</button>
+               <!-- <button class="icon review scriptToolButton"><MessageSquare /> Review</button> -->
                {#if !isStarred}
                   <button on:click={invokeStar} class="icon star scriptToolButton" ><Star /> Star</button>
                {:else}
