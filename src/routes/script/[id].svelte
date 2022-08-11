@@ -160,7 +160,7 @@
       <div class="info">
          
          <div class="info_child">
-            <h2>Informations</h2>
+            <h2>Information</h2>
             <p class="info-p"><span class="info-title">Author:</span> <a id="info-a" href={'/user/' + script.author_id}>{script.author_name}</a></p>
             <p class="info-p"><span class="info-title">Downloads:</span> {script.downloads}</p>
             <p class="info-p"><span class="info-title">Stars:</span> {stars}</p>
