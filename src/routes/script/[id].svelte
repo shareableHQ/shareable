@@ -1,6 +1,6 @@
 <script>
    // Import
-   import { Download, Edit, MessageSquare, Star, AlertTriangle } from 'lucide-svelte';
+   import { Download, Edit, MessageSquare, Star, AlertTriangle, BellPlus, BellMinus } from 'lucide-svelte';
    import { Moon } from 'svelte-loading-spinners';
    import { user } from "$lib/stores";
    import Breadcrumbs from '$components/Breadcrumbs.svelte';
@@ -8,7 +8,7 @@
    import SvelteMarkdown from 'svelte-markdown';
    import { onMount } from 'svelte';
    import supabase from '$lib/db';
-   import { star, unstar, report } from '$lib/functions/scriptActions';
+   import { star, unstar, report, follow, unfollow } from '$lib/functions/scriptActions';
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
    // Props
@@ -22,7 +22,9 @@
    // Looking if script was starred by user or if a report was made by the user
    let isStarred = false;
    let isReported = false;
+   let isFollowing = true;
    if($user){
+      isFollowing = checkFollow()
       starsObj.forEach(element => {
          if(element.stargazer == $user.id) isStarred = true 
       });
@@ -31,6 +33,14 @@
             isReported = true
          }
       })
+   }
+   async function checkFollow(){
+      const { data, error } = await supabase.from('profiles').select('following').eq('id', $user.id)
+      var list = data[0].following
+      list = list.filter((item)=>{
+         return item.script == id
+      })
+      if (list.length > 0){ return true } else { return false }
    }
    // Constants
    const source = `${readme}`
@@ -115,6 +125,23 @@
          }
       }
    }
+
+   async function invokeFollow(){
+      let error = await follow(script.id, $user.id)
+      if(error){
+         addNotification({ text: 'Something went wrong!', position: 'top-right', removeAfter:'3000', type: 'danger' })
+      }else{
+         isFollowing = true
+      }
+   }
+   async function invokeUnfollow(){
+      let error = await unfollow(script.id, $user.id)
+      if(error){
+         addNotification({ text: 'Something went wrong!', position: 'top-right', removeAfter:'3000', type: 'danger' })
+      }else{
+         isFollowing = false
+      }
+   }
 </script>
 
 <svelte:head>
@@ -142,7 +169,11 @@
          <br>
          {#if $user.id != script.author_id}
             <div id="buttonsBar">
-               <!-- <button class="icon review scriptToolButton"><MessageSquare /> Review</button> -->
+               {#if !isFollowing}
+                  <button on:click={invokeFollow} class="icon review scriptToolButton"><BellPlus /> Follow</button>
+               {:else}
+                  <button on:click={invokeUnfollow} class="icon review scriptToolButton"><BellMinus /> Unfollow</button>
+               {/if}
                {#if !isStarred}
                   <button on:click={invokeStar} class="icon star scriptToolButton" ><Star /> Star</button>
                {:else}
