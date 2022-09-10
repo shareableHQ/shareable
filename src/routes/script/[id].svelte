@@ -24,7 +24,7 @@
    let isReported = false;
    let isFollowing = true;
    if($user){
-      isFollowing = checkFollow()
+      checkFollow()
       starsObj.forEach(element => {
          if(element.stargazer == $user.id) isStarred = true 
       });
@@ -40,7 +40,7 @@
       list = list.filter((item)=>{
          return item.script == id
       })
-      if (list.length > 0){ return true } else { return false }
+      if (list.length == 0){ isFollowing = false } else { isFollowing = true }
    }
    // Constants
    const source = `${readme}`
@@ -132,6 +132,7 @@
          addNotification({ text: 'Something went wrong!', position: 'top-right', removeAfter:'3000', type: 'danger' })
       }else{
          isFollowing = true
+         addNotification({text: 'Following ' + script.name + '!', position: 'top-center', removeAfter: '3000', type: 'success'})
       }
    }
    async function invokeUnfollow(){
@@ -140,6 +141,7 @@
          addNotification({ text: 'Something went wrong!', position: 'top-right', removeAfter:'3000', type: 'danger' })
       }else{
          isFollowing = false
+         addNotification({text: 'Unfollowed!', position: 'top-center', removeAfter: '3000', type: 'warning'})
       }
    }
 </script>
