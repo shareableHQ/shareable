@@ -273,6 +273,12 @@ nav > div {
   font-weight: 600;
 }
 
+.rightGroup {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+
 #last-info-child {
   padding-top: 40px;
 }

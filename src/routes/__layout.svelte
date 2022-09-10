@@ -14,7 +14,9 @@
   import Notifications from 'svelte-notifications';
   import Navbar from '../components/Navbar.svelte';
   import Sidebar from '../components/Sidebar.svelte';
+  import { loadNotifs } from '$lib/functions/notifications.js';
   export let isMaintenance;
+  let notifs = [];
   supabase.auth.onAuthStateChange((event, session) => {
     if(event == 'SIGNED_IN'){
       $user = session.user
@@ -37,11 +39,14 @@
          }, 1000);
       }
    }
+   if($user){
+    notifs = loadNotifs($user.id)
+   }
 </script>
 
 <Notifications>
 <Sidebar />
-<Navbar />
+<Navbar notifications={notifs} />
 {#if isMaintenance}
   <p class="not_found">Website is currently under maintenance. Should be up again in a few moments!<br><br>Sorry!</p>
 {:else}
