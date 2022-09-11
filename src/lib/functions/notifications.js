@@ -22,9 +22,9 @@ export async function updateNotifs(userID){
     for(let element of json){
         let request = await fetch(element.api_url)
         let res = await request.json()
-        if(res.updated_at != element.last_update && element.seen == true){
+        if(res.pushed_at != element.last_update && element.seen == true){
             element.seen = false
-            element.last_update = res.updated_at
+            element.last_update = res.pushed_at
         }
     }
     const { data, error } = await supabase.from('profiles').update({ following: json }).eq('id', userID)

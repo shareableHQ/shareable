@@ -9,7 +9,7 @@ export async function follow(scriptID, userID) {
    const url = `https://api.github.com/repos/${owner}/${repoName}`
    let request = await fetch(url)
    let res = await request.json()
-   let updated_at = res.updated_at
+   let updated_at = res.pushed_at
 
    const profile = await supabase.from('profiles').select('following').eq('id', userID)
    let json = profile.data[0].following
