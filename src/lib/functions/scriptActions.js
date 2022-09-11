@@ -6,7 +6,8 @@ export async function follow(scriptID, userID) {
    let owner = data[0].author_name
    let repoName = data[0].repo.repo_name
    let name = data[0].name
-   let request = await fetch(`https://api.github.com/repos/${owner}/${repoName}`)
+   const url = `https://api.github.com/repos/${owner}/${repoName}`
+   let request = await fetch(url)
    let res = await request.json()
    let updated_at = res.updated_at
 
@@ -14,6 +15,7 @@ export async function follow(scriptID, userID) {
    let json = profile.data[0].following
    var obj = {
       script: scriptID,
+      api_url: url,
       scriptName: name,
       last_update: updated_at,
       seen: true

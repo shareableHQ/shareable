@@ -14,7 +14,7 @@
   import Notifications from 'svelte-notifications';
   import Navbar from '../components/Navbar.svelte';
   import Sidebar from '../components/Sidebar.svelte';
-  import { loadNotifs } from '$lib/functions/notifications.js';
+  import { loadNotifs, updateNotifs } from '$lib/functions/notifications.js';
   export let isMaintenance;
   let notifs = [];
   supabase.auth.onAuthStateChange((event, session) => {
@@ -40,6 +40,7 @@
       }
    }
    if($user){
+    updateNotifs($user.id)
     notifs = loadNotifs($user.id)
    }
 </script>

@@ -1,5 +1,5 @@
 <script>
-   import { Home, Search, User, PlusCircle, Code, LayoutGrid, Smartphone, Folder, Rss, Github, Users, Star } from 'lucide-svelte'
+   import { Home, Search, User, PlusCircle, Code, LayoutGrid, Smartphone, Folder, Rss, Github, Users, Star, Bell } from 'lucide-svelte'
    import { sidebar } from '$lib/stores.js';
    import { user } from "$lib/stores";
    import { startLoad, endLoad } from '$lib/functions/utils';
@@ -40,6 +40,7 @@
          <div class="headerLinks">
             <a on:click={(()=>{closeSidebar('load')})} class="icon" href={'/user/' + $user.id}><User /> Profile</a>
             <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/user/stars" ><Star /> Starred</a>
+            <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/user/following" ><Bell /> Following</a>
          </div>
       {/if}
 
