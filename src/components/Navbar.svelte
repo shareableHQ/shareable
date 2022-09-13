@@ -1,5 +1,5 @@
 <script>
-   import { Menu, ChevronDown } from 'lucide-svelte'
+   import { Menu, ChevronDown, Bell, BellRing } from 'lucide-svelte'
    import { user, sidebar } from "$lib/stores";
    import supabase from "$lib/db";
    import { openModal } from 'svelte-modals'
@@ -7,6 +7,7 @@
    import { fly } from 'svelte/transition'
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
+   export let notifications;
 
    const logOut = async () => {
       let { error } = await supabase.auth.signOut();
@@ -48,9 +49,22 @@
       </div>
       <div class="rigth-block">
          {#if $user.email}
-            <div class="rightGroup" on:click={clickOnAvatar}>
-               <img class="avatar" src={$user.user_metadata.avatar_url} alt="">
-               <span id="chevron" class="icon icon_navbar"><ChevronDown /></span>
+            <div class="rightGroup">
+               <a class="button-icon nav-title nav-link icon" href="/notifications">
+                  {#await notifications}
+                     <Bell />
+                  {:then notifications} 
+                     {#if notifications.length == 0}
+                        <Bell />
+                     {:else}
+                        <BellRing color="yellow" />
+                     {/if}
+                  {/await}
+               </a>
+               <div on:click={clickOnAvatar}>
+                  <img class="avatar" src={$user.user_metadata.avatar_url} alt="">
+                  <span id="chevron" class="icon icon_navbar"><ChevronDown /></span>
+               </div>
             </div>
          {:else}
             <button on:click={logInPrompt} class="redBrandButton nav-button">Login</button>
@@ -71,5 +85,8 @@
    .avatar{
       height: 21px;
       border-radius: 50%;
+   }
+   .toRead{
+      color:red !important;
    }
 </style>
