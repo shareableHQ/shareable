@@ -1,39 +1,39 @@
 <script>
-    export let data
-    let { id, script, file, readme, stars, starsObj, reports, generated_download_link } = data
-    let editLink = '/edit?id=' + id
-    let scriptLink = '/script/' + id
-    let title, path = [];
-    if(!script){
-        title = 'Nothing found here!'
-    }else{
-        title = 'Shareable | ' + script.name
-    }
-    if(script){
-        path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
-    }
-    let url = `https://shareable.vercel.app/script/${script.id}`
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+   export let data
+   let { id, script, file, readme, stars, starsObj, reports, generated_download_link } = data
+   let editLink = '/edit?id=' + id
+   let scriptLink = '/script/' + id
+   let title, path = [];
+   if(!script){
+      title = 'Nothing found here!'
+   }else{
+      title = 'Shareable | ' + script.name
+   }
+   if(script){
+      path = [{name:'Home', url:'/', last:false}, {name:script.name, url: scriptLink, last:true}]
+   }
+   let url = `https://shareable.vercel.app/script/${id}`
+   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    import supabase from '$lib/db';
-    import Breadcrumbs from '../../../lib/components/Breadcrumbs.svelte';
-    import { Download, Edit, MessageSquare, Star, AlertTriangle, BellPlus, BellMinus } from 'lucide-svelte';
-    import { user } from '$lib/stores';
-    import { checkFollow, star, unstar, report, follow, unfollow } from '$lib/functions/scriptUtilities';
-    import { getNotificationsContext } from 'svelte-notifications';
-    const { addNotification } = getNotificationsContext();
-    import { onMount } from 'svelte';
-    let isFollowing, isStarred, isReported;
-    if($user){
-        isFollowing = checkFollow($user.id, id)
-        starsObj.forEach(element => {
-            if(element.stargazer == $user.id) isStarred = true 
-        });
-        reports.forEach(element =>{
-            if(element.author_id == $user.id) {
-                isReported = true
-            }
-        })
+   import supabase from '$lib/db';
+   import Breadcrumbs from '../../../lib/components/Breadcrumbs.svelte';
+   import { Download, Edit, MessageSquare, Star, AlertTriangle, BellPlus, BellMinus } from 'lucide-svelte';
+   import { user } from '$lib/stores';
+   import { checkFollow, star, unstar, report, follow, unfollow } from '$lib/functions/scriptUtilities';
+   import { getNotificationsContext } from 'svelte-notifications';
+   const { addNotification } = getNotificationsContext();
+   import { onMount } from 'svelte';
+   let isFollowing, isStarred, isReported;
+   if($user){
+      isFollowing = checkFollow($user.id, id)
+      starsObj.forEach(element => {
+         if(element.stargazer == $user.id) isStarred = true 
+      });
+      reports.forEach(element =>{
+         if(element.author_id == $user.id) {
+               isReported = true
+         }
+      })
    }
    onMount(()=>{
         // highlight.js
@@ -105,9 +105,13 @@
 
 
 <svelte:head>
-    <title>{title}</title>
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={script.desc}/>
+   <title>{title}</title>
+   <meta property="og:title" content={title} />
+   {#if script} 
+      <meta property="og:description" content={script.desc}/>
+   {:else}
+      <meta name="description" content="Not found">
+   {/if}
   	<meta property="og:url" content={url} />
 </svelte:head>
 

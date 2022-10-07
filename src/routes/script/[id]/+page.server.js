@@ -30,18 +30,20 @@ export async function load({ params }) {
    let reports = data
 
    marked.setOptions({ mangle:false })
-   let source = marked.parse(readme)
-   const $ = cheerio.load(source);
-   let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path.replace(' ', '%20')}`, '').replace('/', '')
-   console.log(branch)
-   $('img').each(function (i, elem) {
-       if($(this).attr('src').indexOf('http') == -1){
+   let source = ''
+   if(script){
+      source = marked.parse(readme)
+      const $ = cheerio.load(source);
+      let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.file_path.replace(' ', '%20')}`, '').replace('/', '')
+      $('img').each(function (i, elem) {
+         if($(this).attr('src').indexOf('http') == -1){
             var url = `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`
             source = source.replace(`src="${$(this).attr('src')}"`, `src="${url}${$(this).attr('src')}"; style="max-width:100%"`)
-       }else if($(this).attr('src').indexOf('blob') != -1){
+         }else if($(this).attr('src').indexOf('blob') != -1){
             source = source.replace(`src="${$(this).attr('src')}"`, `src="${$(this).attr('src')}?raw=true"; style="max-width:100%"`)
-       }
-    });
+         }
+      });
+   }
     
     let link = "data:text/javascript;charset=utf-8," + encodeURIComponent(file);
 
