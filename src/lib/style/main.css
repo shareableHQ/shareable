@@ -341,7 +341,7 @@ nav > div {
 
 /* SIDEBAR */
 .sidebar-fake {
-  overflow: hidden;
+  overflow: auto;
   position: absolute;
   top: 50px;
   left: -290px;
@@ -354,7 +354,7 @@ nav > div {
 }
 
 .sidebar {
-  overflow: scroll;
+  overflow: auto;
   position: absolute;
   top: 50px;
   left: -290px;

@@ -70,7 +70,11 @@
 
 <style>
    .sidebar, .sidebar-fake{
-      transition: left 0.3s ease-in-out
+      transition: left 0.3s ease-in-out;
+   }
+   .sidebar-content{
+      position: relative;
+      margin-bottom: 100px;
    }
    a{
 	   text-decoration: none;
