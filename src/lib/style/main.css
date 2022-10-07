@@ -165,6 +165,7 @@ textarea {
   padding: 5px 10px;
   border-radius: 10px;
   color: #fff;
+  font-size: 15px;
 }
 
 @media (max-width: 1024px) {
@@ -342,7 +343,7 @@ nav > div {
 /* SIDEBAR */
 .sidebar-fake {
   overflow: auto;
-  position: absolute;
+  position: fixed;
   top: 50px;
   left: -290px;
   z-index: 2;
@@ -355,7 +356,7 @@ nav > div {
 
 .sidebar {
   overflow: auto;
-  position: absolute;
+  position: fixed;
   top: 50px;
   left: -290px;
   z-index: 3;
@@ -475,6 +476,11 @@ body {
   width: 18px;
   height: 18px;
   margin-bottom: -2px;
+}
+
+.scriptbox-icon > svg {
+  width: 17px;
+  height: 17px;
 }
 
 .icon_navbar > svg {
