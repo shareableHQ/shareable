@@ -18,18 +18,6 @@ export async function getUserRepo(username) {
    return json
 }
 
-export async function checkFollow(userID, scriptID){
-    let isFollowing;
-    const { data, error } = await supabase.from('profiles').select('following').eq('id', userID)
-    var list = data[0].following
-    list = list.filter((item)=>{
-       return item.script == scriptID
-    })
-    if (list.length == 0){ isFollowing = false } else { isFollowing = true }
-    return isFollowing
-}
-
-
 export async function follow(scriptID, userID) {
    var { data, error } = await supabase.from('scripts').select('*').eq('id', scriptID)
    let owner = data[0].author_name

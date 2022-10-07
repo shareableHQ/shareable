@@ -19,13 +19,14 @@
    import Breadcrumbs from '../../../lib/components/Breadcrumbs.svelte';
    import { Download, Edit, MessageSquare, Star, AlertTriangle, BellPlus, BellMinus } from 'lucide-svelte';
    import { user } from '$lib/stores';
-   import { checkFollow, star, unstar, report, follow, unfollow } from '$lib/functions/scriptUtilities';
+   import { star, unstar, report, follow, unfollow } from '$lib/functions/scriptUtilities';
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
    import { onMount } from 'svelte';
-   let isFollowing, isStarred, isReported;
+   let isFollowing = true
+   let isStarred, isReported = false;
    if($user){
-      isFollowing = checkFollow($user.id, id)
+      checkFollow()
       starsObj.forEach(element => {
          if(element.stargazer == $user.id) isStarred = true 
       });
@@ -34,6 +35,14 @@
                isReported = true
          }
       })
+   }
+   async function checkFollow(){
+      const { data, error } = await supabase.from('profiles').select('following').eq('id', $user.id)
+      var list = data[0].following
+      list = list.filter((item)=>{
+         return item.script == id
+      })
+      if (list.length == 0){ isFollowing = false } else { isFollowing = true }
    }
    onMount(()=>{
         // highlight.js
