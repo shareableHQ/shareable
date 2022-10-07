@@ -1,6 +1,6 @@
 import supabase from '$lib/db';
 
-export async function get({url}) {
+export async function load({url}) {
    const query = url.searchParams.get('q')
    let results = []
    if(query){
@@ -8,9 +8,7 @@ export async function get({url}) {
       results = data.filter(element => element.name.toLowerCase().indexOf(query.toLowerCase()) != -1 )
    }
    return {
-      body: {
-         results: results,
-         query: query
-      }
-   }
+   results: results,
+   query: query
+}
 }

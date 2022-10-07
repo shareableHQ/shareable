@@ -2,17 +2,18 @@
    import { Home, Search, User, PlusCircle, Code, LayoutGrid, Smartphone, Folder, Rss, Github, Users, Star, Bell } from 'lucide-svelte'
    import { sidebar } from '$lib/stores.js';
    import { user } from "$lib/stores";
-   import { startLoad, endLoad } from '$lib/functions/utils';
+   import { startLoad, endLoad } from '$lib/functions/websiteUtilities';
    import { tagStore, loading } from '$lib/stores';
    let isOpen = false
    $:{
       isOpen = $sidebar
    }
-   function closeSidebar(param){
+   function closeSidebar(param, url){
       sidebar.set(false)
       document.getElementsByTagName('body')[0].style.overflow = 'unset'
       startLoad()
       if(param == 'tag'){
+         window.location.href = url
          tagStore.set(!$tagStore)
       }else if(param == 'load'){
          loading.set(!$loading)
@@ -48,10 +49,10 @@
          <span>Browse</span>
        </p>
        <div class="headerLinks">
-         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Script"><Code /> Scripts</a>
-         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Home Screen Widget"><LayoutGrid /> Home screen widgets</a>
-         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=Lock Screen Widget"><Smartphone /> Lock screen widgets</a>
-         <a on:click={(()=>{closeSidebar('tag')})} class="icon" href="/browse?tag=All"><Folder /> All widgets</a>
+         <a on:click={(()=>{closeSidebar('tag', "/browse?tag=Script")})} class="icon" href="/browse?tag=Script"><Code /> Scripts</a>
+         <a on:click={(()=>{closeSidebar('tag', "/browse?tag=Home Screen Widget")})} class="icon" href="/browse?tag=Home Screen Widget"><LayoutGrid /> Home screen widgets</a>
+         <a on:click={(()=>{closeSidebar('tag', "/browse?tag=Lock Screen Widget")})} class="icon" href="/browse?tag=Lock Screen Widget"><Smartphone /> Lock screen widgets</a>
+         <a on:click={(()=>{closeSidebar('tag', "/browse?tag=All")})} class="icon" href="/browse?tag=All"><Folder /> All widgets</a>
        </div>
 
        <p class="sidebarHeader">
