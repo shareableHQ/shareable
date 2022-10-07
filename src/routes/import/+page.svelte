@@ -1,90 +1,73 @@
-<script context="module">
-   import { getUserRepo } from '../lib/functions/utils';
-   import supabase from '$lib/db';
-   export async function load(){
-      let items = []
-      let username, id
-      try{
-         username = supabase.auth.user().user_metadata.user_name
-         id = supabase.auth.user().id
-         items = await getUserRepo(username)
-      }catch{}
-      return {props:{items, username, id}}
-   }
-</script>
 <script>
-   import Select from 'svelte-select';
-   export let items
-   import { openModal } from 'svelte-modals'
-   import Modal from '../components/Modal.svelte';
-   import { Moon } from 'svelte-loading-spinners';
-   import { getNotificationsContext } from 'svelte-notifications';
-   const { addNotification } = getNotificationsContext();
-   import { goto } from "$app/navigation";
-   import { browser } from '$app/env'
-   import Breadcrumbs from '$components/Breadcrumbs.svelte'
-   export let username
-   export let id
-   if(browser && !id){
-      goto('/')
-   }
-   const optionIdentifier = 'id'
-   const labelIdentifier = 'name'
+    import { Moon } from 'svelte-loading-spinners';
+    import { getNotificationsContext } from 'svelte-notifications';
+    const { addNotification } = getNotificationsContext();
+    import { goto } from "$app/navigation";
+    import { browser } from '$app/environment'
+    import Select from 'svelte-select';
+    import Breadcrumbs from '../../lib/components/Breadcrumbs.svelte';
+    export let data
+    let { items, username, id } = data
+    if(browser && !id){
+        goto('/')
+    }
+    const optionIdentifier = 'id'
+    const labelIdentifier = 'name'
    
    
-   let name, repo, repo_path, type;
-   let readme_path = 'README.md';
-   let desc = '';
-   async function publish(){
-      if(!repo){
-         addNotification({ text: 'Select a GitHub repo!', position: 'bottom-center' })
-      }else{
-         document.getElementById('page').style.display = 'none'
-         document.getElementById('loader').style.display = 'flex'
-         // openModal(PublishModal,{title:'Publish your script', message:'Are you ready to publish ' + name + ' to Shareable?'})
-         let request = await fetch('./api/publish',{
-            method:'POST',
-            body:JSON.stringify({
-               title: name,
-               author:{
-                  author_id:id,
-                  author_username: username
-               },
-               type:type.value,
-               desc: desc,
-               repo:{
-                  repo_id:repo.id,
-                  repo_name: repo.name,
-                  file_path:repo_path,
-                  readme_path: readme_path
-               }
+    let name, repo, repo_path, type;
+    let readme_path = 'README.md';
+    let desc = '';
+    async function publish(){
+        if(!repo){
+            addNotification({ text: 'Select a GitHub repo!', position: 'bottom-center' })
+        }else{
+            document.getElementById('page').style.display = 'none'
+            document.getElementById('loader').style.display = 'flex'
+            // openModal(PublishModal,{title:'Publish your script', message:'Are you ready to publish ' + name + ' to Shareable?'})
+            let request = await fetch('./api/publish',{
+                method:'POST',
+                body:JSON.stringify({
+                title: name,
+                author:{
+                    author_id:id,
+                    author_username: username
+                },
+                type:type.value,
+                desc: desc,
+                repo:{
+                    repo_id:repo.id,
+                    repo_name: repo.name,
+                    file_path:repo_path,
+                    readme_path: readme_path
+                }
+                })
             })
-         })
-         let res = await request.json()
-         if(res.status == 'success'){
-            goto('/script/' + res.id)
-         }else if(res.status = 'invalid url'){
-            document.getElementById('page').style.display = 'block'
-            document.getElementById('loader').style.display = 'none'
-            openModal(Modal, {title:'Whoops!', message:res.message})
-         }else{
-            document.getElementById('page').style.display = 'block'
-            document.getElementById('loader').style.display = 'none'
-            openModal(Modal, {title:'Whoops!', message:'Something went wrong! Please try again or reach support.'})
+            let res = await request.json()
+            if(res.status == 'success'){
+                goto('/script/' + res.id)
+            }else if(res.status = 'invalid url'){
+                document.getElementById('page').style.display = 'block'
+                document.getElementById('loader').style.display = 'none'
+                openModal(Modal, {title:'Whoops!', message:res.message})
+            }else{
+                document.getElementById('page').style.display = 'block'
+                document.getElementById('loader').style.display = 'none'
+                openModal(Modal, {title:'Whoops!', message:'Something went wrong! Please try again or reach support.'})
             
-         }
-      }
-   }
+            }
+        }
+    }
    
    function handleSelect(event){
-      repo = event.detail
-   }
+        repo = event.detail
+    }
    function handleDeselect(){
-      repo = null
-   }
+        repo = null
+    }
    function handleSelect2(event){
-      type = event.detail
-   }
+        type = event.detail
+    }
    let path = [{name:'Home', url:'/', last:false}, {name:'Publish' ,url:'', last:true}]
 </script>
 

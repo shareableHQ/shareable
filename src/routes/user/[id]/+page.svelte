@@ -1,16 +1,15 @@
 <script>
-   import { Moon } from 'svelte-loading-spinners';
-   import ScriptBox from '$components/ScriptBox.svelte';
-   import { user } from '$lib/stores';
-   export let data;
-   export let user_metadata
-   let username, title;
-   if(data.length != 0){
-      username = data[0].author_name
-      title = `Shareable | ${username}`
-   }else{
-      title = 'Shareable'
-   }
+    import ScriptBox from '../../../lib/components/ScriptBox.svelte';
+    import { user } from '$lib/stores';
+    export let data;
+    let { dbResponse, user_metadata } = data
+    let username, title;
+    if(dbResponse.length != 0){
+        username = dbResponse[0].author_name
+        title = `Shareable | ${username}`
+    }else{
+        title = 'Shareable'
+    }
 </script>
 
 <svelte:head>
@@ -18,20 +17,18 @@
    <meta property="og:title" content={title} />
 </svelte:head>
 
-
-<div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
-{#if data.length == 0 && user_metadata.user_id != $user.id}
+{#if dbResponse.length == 0 && user_metadata.user_id != $user.id}
    <div class="loader_error"></div>
    <p class="not_found">We found nothing about this user!</p>
    <p class="not_found_p">They probably haven't published anything yet or not even created an account!</p>
 
-{:else if data.length == 0 && user_metadata.user_id == $user.id}
+{:else if dbResponse.length == 0 && user_metadata.user_id == $user.id}
 <div class="user_title">
    <img class="user_avatar" src={$user.user_metadata.avatar_url} alt="">
    <h1>{$user.user_metadata.user_name}</h1>
 </div>
 <div class="info">
-   <p class="tag">Publications: {data.length}</p>
+   <p class="tag">Publications: {dbResponse.length}</p>
    <p class="tag">Total downloads: 0</p>
 </div>
 <p class="not_found_p" style="margin-top:75px">No publications yet!</p>
@@ -41,11 +38,11 @@
    <h1>{username}</h1>
 </div>
 <div class="info">
-   <p class="tag">Publications: {data.length}</p>
+   <p class="tag">Publications: {dbResponse.length}</p>
    <p class="tag">Total downloads: {user_metadata.totalDownloads}</p>
 </div>
 <div class="scripts-container">
-   {#each data as script}
+   {#each dbResponse as script}
       <ScriptBox script={script} />
    {/each}
 </div>

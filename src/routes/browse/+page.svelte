@@ -1,12 +1,11 @@
 <script>
-   import { Moon } from 'svelte-loading-spinners';
-   import ScriptBox from '$components/ScriptBox.svelte';
-   import { browser } from '$app/env';
-   import { tagStore } from '$lib/stores';
-   import { endLoad } from '$lib/functions/utils';
-
-   export let data, tag
-
+    import ScriptBox from "../../lib/components/ScriptBox.svelte";
+    import { browser } from '$app/environment';
+    import { tagStore } from '$lib/stores';
+    import { endLoad } from '$lib/functions/websiteUtilities'
+    import { Moon } from 'svelte-loading-spinners';
+    export let data
+    let { dbResponse, tag } = data
    $:{
       console.log($tagStore)
       if(browser){
@@ -17,6 +16,8 @@
    }
 </script>
 
+
+
 <svelte:head>
    {#if tag != 'All'}
       <title>Shareable | Browse {tag.toLowerCase()}s</title>
@@ -24,6 +25,7 @@
       <title>Shareable | Browse all widgets</title>
    {/if}
 </svelte:head>
+
 
 <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
 <div id="page">
@@ -33,7 +35,7 @@
       <h1>Browse all widgets</h1>
    {/if}
    <div class="scripts-container">
-      {#each data as script}
+      {#each dbResponse as script}
          <ScriptBox script={script} />
       {/each}
    </div>

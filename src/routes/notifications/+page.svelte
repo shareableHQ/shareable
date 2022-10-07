@@ -1,7 +1,6 @@
 <script>
     import { user } from '$lib/stores';
     import { loadAllNotifs, readNotif } from '$lib/functions/notifications.js';
-    import { Moon } from 'svelte-loading-spinners';
     import { Bell, BellRing } from 'lucide-svelte';
     let notifications = [];
     if($user){
@@ -20,7 +19,7 @@
 <div id="page">
     <h1>Notifications</h1>
     {#await notifications}
-        <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div>
+        <!-- <div id="loader" class="loader"><Moon size="50" color="#FF2D55" unit="px" duration="1s"></Moon></div> -->
     {:then notifications} 
         {#if notifications.length > 0}
             {#each notifications as notif}

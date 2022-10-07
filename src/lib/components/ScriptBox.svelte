@@ -1,6 +1,6 @@
 <script>
    import { Download, Smartphone, LayoutGrid, Code } from 'lucide-svelte';
-   import { startLoad } from '$lib/functions/utils';
+   //import { startLoad } from '$lib/functions/utils';
    export let script
 </script>
 
@@ -11,6 +11,6 @@
       <p class="script-details"><span class="icon tag"><Download /> {script.downloads}</span> <span class="icon tag">{#if script.type == 'Lock Screen Widget'}<Smartphone />{:else if script.type == 'Home Screen Widget'}<LayoutGrid />{:else}<Code />{/if} {script.type}</span></p>
    </div>
    <div class="script-right">
-      <a class="script-link get_button" on:click={startLoad} href={"/script/" + script.id}>GET</a>
+      <a class="script-link get_button" href={"/script/" + script.id}>GET</a>
    </div>
 </div>
