@@ -126,84 +126,84 @@
 
 {#if script}
 <div class="script_page">
-    <Breadcrumbs path={path} />
-    <h1>{script.name}</h1>
-    <h2 class="author">Created by <a href={'/user/' + script.author_id} id="author_name">{script.author_name}</a></h2>
-    <p><span class="tag"> <span class="icon startag"><Star /> </span>{stars}</span></p>
-    <br>
-    <a href='' on:click={registerDownload} class="icon download scriptToolButton"><Download /> Download</a>
-    <a href={generated_download_link} download={script.repo.filename.split('.')[0]} id="invisible-download" style="display=none;"> </a>
-    {#if $user}
-        {#if $user.id == script.author_id}
-            <a href={editLink}  class="icon edit scriptToolButton"><Edit /> Edit</a>
-        {/if}
-        <br>
-        {#if $user.id != script.author_id}
-            <div id="buttonsBar">
-                {#if !isFollowing}
-                    <button on:click={invokeFollow} class="icon review scriptToolButton"><BellPlus /> Follow</button>
-                {:else}
-                    <button on:click={invokeUnfollow} class="icon review scriptToolButton"><BellMinus /> Unfollow</button>
-                {/if}
-                {#if !isStarred}
-                    <button on:click={invokeStar} class="icon star scriptToolButton" ><Star /> Star</button>
-                {:else}
-                    <button on:click={invokeUnstar} class="icon star scriptToolButton" ><Star fill="#333"/> Unstar</button>
-                {/if}
-                {#if !isReported}
-                    <button id="reportButton" on:click={invokeReport} class="icon report scriptToolButton"><AlertTriangle /> Report</button>
-                {:else}
-                    <button disabled id="reportButton" on:click={invokeReport} class="icon report scriptToolButton isReported"><AlertTriangle /> Report</button>
-                {/if}
-            </div>
-        {/if}
-    {/if}
-    <div class="info">     
-        <div class="info_child">
-            <h2>Informations</h2>
-            <p class="info-p"><span class="info-title">Author:</span> <a id="info-a" href={'/user/' + script.author_id}>{script.author_name}</a></p>
-            <p class="info-p"><span class="info-title">Downloads:</span> {script.downloads}</p>
-            <p class="info-p"><span class="info-title">Stars:</span> {stars}</p>
-            <p class="info-p"><span class="info-title">Type:</span> {script.type}</p>
-            <p class="info-p"><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
-         </div>
-                 
-         <div class="info_child">
-            <h2>Description</h2>
-            {#if script.repo.readme_path && readme != ''}
-               <div class="desc">
-                  {@html readme}
-               </div>
+   <Breadcrumbs path={path} />
+   <h1>{script.name}</h1>
+   <h2 class="author">Created by <a href={'/user/' + script.author_id} id="author_name">{script.author_name}</a></h2>
+   <p><span class="tag"> <span class="icon startag"><Star /> </span>{stars}</span></p>
+   <br>
+   <a href='' on:click={registerDownload} class="icon download scriptToolButton"><Download /> Download</a>
+   <a href={generated_download_link} download={script.repo.filename.split('.')[0]} id="invisible-download" style="display=none;"> </a>
+   {#if $user}
+      {#if $user.id == script.author_id}
+         <a href={editLink}  class="icon edit scriptToolButton"><Edit /> Edit</a>
+      {/if}
+      <br>
+      {#if $user.id != script.author_id}
+         <div id="buttonsBar">
+            {#if !isFollowing}
+               <button on:click={invokeFollow} class="icon review scriptToolButton"><BellPlus /> Follow</button>
             {:else}
-               <p>No description provided!</p>
+               <button on:click={invokeUnfollow} class="icon review scriptToolButton"><BellMinus /> Unfollow</button>
+            {/if}
+            {#if !isStarred}
+               <button on:click={invokeStar} class="icon star scriptToolButton" ><Star /> Star</button>
+            {:else}
+               <button on:click={invokeUnstar} class="icon star scriptToolButton" ><Star fill="#333"/> Unstar</button>
+            {/if}
+            {#if !isReported}
+               <button id="reportButton" on:click={invokeReport} class="icon report scriptToolButton"><AlertTriangle /> Report</button>
+            {:else}
+               <button disabled id="reportButton" on:click={invokeReport} class="icon report scriptToolButton isReported"><AlertTriangle /> Report</button>
             {/if}
          </div>
-    </div>
+      {/if}
+   {/if}
+   <div class="info">     
+      <div class="info_child">
+         <h2>Informations</h2>
+         <p class="info-p"><span class="info-title">Author:</span> <a id="info-a" href={'/user/' + script.author_id}>{script.author_name}</a></p>
+         <p class="info-p"><span class="info-title">Downloads:</span> {script.downloads}</p>
+         <p class="info-p"><span class="info-title">Stars:</span> {stars}</p>
+         <p class="info-p"><span class="info-title">Type:</span> {script.type}</p>
+         <p class="info-p"><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
+      </div>
+                 
+      <div class="info_child">
+         <h2>Description</h2>
+         {#if script.repo.readme_path && readme != ''}
+            <div class="desc">
+               {@html readme}
+            </div>
+         {:else}
+            <p>No description provided!</p>
+         {/if}
+      </div>
+   </div>
 </div>
 {:else}
-    <p class="not_found">We found nothing here!</p>
+   <p class="not_found">We found nothing here!</p>
 {/if}
 
 
 <style>
-    .isReported{
-       opacity: 0.6;
-       cursor: not-allowed;
-    }
-    .tag{
-       background-color: #FFE6771a;
-    }
-    .startag{
-       color: #FFE677;
-    }
-    #info-a{
-       color:white;
-       text-decoration: underline;
-    }
-    #info-a:hover{
-       opacity: 0.7;
-    }
-    /* .loader{
-       display: none;
-    } */
+   .isReported{
+      opacity: 0.6;
+      cursor: not-allowed;
+   }
+   .tag{
+      background-color: #FFE6771a;
+   }
+   .startag{
+      color: #FFE677;
+   }
+   #info-a{
+      color:white;
+      text-decoration: underline;
+   }
+   #info-a:hover{
+      opacity: 0.7;
+   }
+   /* .loader{
+      display: none;
+   } */
  </style>
