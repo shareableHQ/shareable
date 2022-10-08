@@ -17,9 +17,9 @@
 
    import supabase from '$lib/db';
    import Breadcrumbs from '../../../lib/components/Breadcrumbs.svelte';
-   import { Download, Edit, MessageSquare, Star, AlertTriangle, BellPlus, BellMinus } from 'lucide-svelte';
+   import { Download, Edit, MessageSquare, Star, AlertTriangle, BellPlus, BellMinus, ArrowUp, Hammer } from 'lucide-svelte';
    import { user } from '$lib/stores';
-   import { star, unstar, report, follow, unfollow } from '$lib/functions/scriptUtilities';
+   import { star, unstar, report, follow, unfollow, updateVersion } from '$lib/functions/scriptUtilities';
    import { getNotificationsContext } from 'svelte-notifications';
    const { addNotification } = getNotificationsContext();
    import { onMount } from 'svelte';
@@ -110,6 +110,42 @@
          addNotification({text: 'Unfollowed!', position: 'top-center', removeAfter: '3000', type: 'warning'})
       }
    }
+
+   async function invokeEnableUpdater(){
+      let isSure = window.confirm("Are you sure you want to enable the updater for this script?")
+      if(isSure){
+         let version = window.prompt('Enter the initial version.', '1.0')
+         let release_notes = window.prompt('Enter the release notes for the initial version.', 'Initial release')
+         if(version.trim().length == 0 || version == null || release_notes.trim().length == 0 || release_notes == null){
+            addNotification({ text: 'Please enter both version and release notes!', position: 'top-right', removeAfter:'3000', type: 'error' })
+         }else{
+            let error = await updateVersion(script.id, version, release_notes)
+            if(!error){
+               script.updater.isUpdaterEnabled = true
+               addNotification({text: 'Updater enabled!', position: 'top-right', removeAfter: '3000', type: 'success'})
+               script.updater.version = version
+            }else{
+               addNotification({ text: 'Something went wrong', position: 'top-right', removeAfter:'3000', type: 'error' })
+            }
+         }
+      }
+   }
+
+   async function invokeAddVersion(){
+      let version = window.prompt('Enter the new version.', '1.1')
+      let release_notes = window.prompt('Enter the release notes for the new version.', 'Bug fixes')
+      if(version.trim().length == 0 || version == null || release_notes.trim().length == 0 || release_notes == null){
+         addNotification({ text: 'Please enter both version and release notes!', position: 'top-right', removeAfter:'3000', type: 'error' })
+      }else{
+         let error = await updateVersion(script.id, version, release_notes)
+         if(!error){
+               addNotification({text: 'New version added!', position: 'top-right', removeAfter: '3000', type: 'success'})
+               script.updater.version = version
+         }else{
+               addNotification({ text: 'Something went wrong', position: 'top-right', removeAfter:'3000', type: 'error' })
+         }
+      }
+   }
 </script>
 
 
@@ -134,29 +170,34 @@
    <a href='' on:click={registerDownload} class="icon download scriptToolButton"><Download /> Download</a>
    <a href={generated_download_link} download={script.repo.filename.split('.')[0]} id="invisible-download" style="display=none;"> </a>
    {#if $user}
+   <div id="buttonsBar">
       {#if $user.id == script.author_id}
-         <a href={editLink}  class="icon edit scriptToolButton"><Edit /> Edit</a>
+         {#if script.updater.isUpdaterEnabled}
+            <button on:click={invokeAddVersion}  class="icon updater scriptToolButton"><ArrowUp /> New version</button>
+         {:else}
+            <button on:click={invokeEnableUpdater}  class="icon updater scriptToolButton"><ArrowUp /> Enable updater</button>
+         {/if}
+         <button on:click={()=> (window.location.href = editLink) }  class="icon edit scriptToolButton"><Edit /> Edit</button>
+         <!-- <button on:click={()=> (window.location.href = editLink) }  class="icon beta_testing scriptToolButton"><Hammer /> Beta testing!</button> -->
       {/if}
-      <br>
       {#if $user.id != script.author_id}
-         <div id="buttonsBar">
-            {#if !isFollowing}
-               <button on:click={invokeFollow} class="icon review scriptToolButton"><BellPlus /> Follow</button>
-            {:else}
-               <button on:click={invokeUnfollow} class="icon review scriptToolButton"><BellMinus /> Unfollow</button>
-            {/if}
-            {#if !isStarred}
-               <button on:click={invokeStar} class="icon star scriptToolButton" ><Star /> Star</button>
-            {:else}
-               <button on:click={invokeUnstar} class="icon star scriptToolButton" ><Star fill="#333"/> Unstar</button>
-            {/if}
-            {#if !isReported}
-               <button id="reportButton" on:click={invokeReport} class="icon report scriptToolButton"><AlertTriangle /> Report</button>
-            {:else}
-               <button disabled id="reportButton" on:click={invokeReport} class="icon report scriptToolButton isReported"><AlertTriangle /> Report</button>
-            {/if}
-         </div>
+         {#if !isFollowing}
+            <button on:click={invokeFollow} class="icon review scriptToolButton"><BellPlus /> Follow</button>
+         {:else}
+            <button on:click={invokeUnfollow} class="icon review scriptToolButton"><BellMinus /> Unfollow</button>
+         {/if}
+         {#if !isStarred}
+            <button on:click={invokeStar} class="icon star scriptToolButton" ><Star /> Star</button>
+         {:else}
+            <button on:click={invokeUnstar} class="icon star scriptToolButton" ><Star fill="#333"/> Unstar</button>
+         {/if}
+         {#if !isReported}
+            <button id="reportButton" on:click={invokeReport} class="icon report scriptToolButton"><AlertTriangle /> Report</button>
+         {:else}
+            <button disabled id="reportButton" on:click={invokeReport} class="icon report scriptToolButton isReported"><AlertTriangle /> Report</button>
+         {/if}
       {/if}
+   </div>
    {/if}
    <div class="info">     
       <div class="info_child">
@@ -164,6 +205,9 @@
          <p class="info-p"><span class="info-title">Author:</span> <a id="info-a" href={'/user/' + script.author_id}>{script.author_name}</a></p>
          <p class="info-p"><span class="info-title">Downloads:</span> {script.downloads}</p>
          <p class="info-p"><span class="info-title">Stars:</span> {stars}</p>
+         {#if script.updater.isUpdaterEnabled}
+         <p class="info-p"><span class="info-title">Version:</span> {script.updater.version}</p>
+         {/if}
          <p class="info-p"><span class="info-title">Type:</span> {script.type}</p>
          <p class="info-p"><span class="info-title">Published on:</span> {new Date(script.created_at).getDate()} {months[new Date(script.created_at).getMonth()]} {new Date(script.created_at).getFullYear()}</p>
       </div>
