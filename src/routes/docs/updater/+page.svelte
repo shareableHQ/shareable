@@ -53,7 +53,7 @@
     <code>
         // URL
         const baseUrl = "https://shareable.vercel.app/api/updater" // takes id as a parameter
-        let url = "https://shareable.vercel.app/api/updater?id=1"
+        const url = "https://shareable.vercel.app/api/updater?id=1"
     </code>
     <code>
         // Response is a JSON object
