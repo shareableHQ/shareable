@@ -13,7 +13,7 @@ export async function GET({ url }){
         let updaterData = data.updater
 
         if(!updaterData.isUpdaterEnabled){
-            return new Response("Updater not enabled for this script. Check documentation for more informations.")
+            return new Response("Updater not enabled for this script. Check documentation for more informations. https://shareable.vercel.app/docs/updater")
         }else{
             let updaterData = data.updater
             updaterData.download_link = `https://shareable.vercel.app/api/download?id=${id}`

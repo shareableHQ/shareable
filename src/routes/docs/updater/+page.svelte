@@ -63,6 +63,7 @@
         download_link: String // url that redirects to script's page after starting the download of the script 
     </code>
 </pre>
+<p>If the updater is not enabled for a script, the API will return an error string.</p>
 
 <h2>Contributing</h2>
 <p>If you found an error in the docs or have an idea for something new, open an issue on  <a href="https://shareableHQ/shareable">GitHub</a>. </p>
