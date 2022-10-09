@@ -1,5 +1,23 @@
 import supabase from '$lib/db';
 
+
+export async function updateVersion(scriptID, newVersion, release_notes){ //valid for enabling updater too
+   var { data, error } = await supabase.from('scripts').select('*').eq('id', scriptID)
+   data = data[0]
+
+   var obj = {
+      isUpdaterEnabled: true,
+      version: String(newVersion),
+      release_notes: release_notes,
+      download_link: `https://shareable.vercel.app/api/download?id=${scriptID}`
+   }
+
+   var { data, error } = await supabase.from('scripts').update({ updater: obj }).eq('id', scriptID)
+   if (error) {
+      return error
+   }
+}
+
 export async function getUserRepo(username) {
    let req1 = await fetch(`https://api.github.com/users/${username}`)
    let json1 = await req1.json()

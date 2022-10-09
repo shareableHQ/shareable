@@ -1,5 +1,5 @@
 <script>
-   import { Home, Search, User, PlusCircle, Code, LayoutGrid, Smartphone, Folder, Rss, Github, Users, Star, Bell } from 'lucide-svelte'
+   import { Home, Search, User, PlusCircle, Code, LayoutGrid, Smartphone, Folder, Rss, Github, Users, Star, Bell, BookOpen } from 'lucide-svelte'
    import { sidebar } from '$lib/stores.js';
    import { user } from "$lib/stores";
    import { startLoad, endLoad } from '$lib/functions/websiteUtilities';
@@ -60,6 +60,7 @@
        </p>
        <div class="headerLinks">
          <a href="/feed" class="icon"><Rss /> RSS feed</a>
+         <a on:click={(()=>{closeSidebar('load')})} href="/docs" class="icon"><BookOpen /> Docs</a>
          <a class="icon" href="https://github.com/shareableHQ/shareable" target="_blank"><Github /> Source code</a>
          <a class="icon" on:click={closeSidebar} href="/team"><Users /> Shareable Team</a>
        </div>
