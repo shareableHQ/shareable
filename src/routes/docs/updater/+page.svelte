@@ -48,7 +48,7 @@
 <p>All credits to <a href="https://github.com/FifiTheBulldog">FifiTheBulldog</a> for this script.</p>
 
 <h2>The API is public, so anyone can write their own approach</h2>
-<p>Shareable's updater api is public, so you can write your own updater module: here's some informations that may be useful:</p>
+<p>Shareable's updater api is public, so you can write your own updater module: here's some informations that may be useful.</p>
 <pre lang="javascript">
     <code>
         // URL
@@ -64,6 +64,8 @@
     </code>
 </pre>
 
+<h2>Contributing</h2>
+<p>If you found an error in the docs or have an idea for something new, open an issue on  <a href="https://shareableHQ/shareable">GitHub</a>. </p>
 
 <Footer />
 
