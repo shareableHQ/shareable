@@ -75,7 +75,7 @@
    }
    .sidebar-content{
       position: relative;
-      margin-bottom: 100px;
+      margin-bottom: 130px;
    }
    a{
 	   text-decoration: none;
