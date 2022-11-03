@@ -7,7 +7,7 @@ export async function load({ params }) {
    const id = params.id
    var { data, error } = await supabase.from('scripts').select('*').eq('id', id)
    let script = data[0];
-   let file, readme;
+   let file, readme = '';
    if(script){
       let fileReq = await fetch(script.download_url)
       file = await fileReq.text()
