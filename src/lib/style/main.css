@@ -214,8 +214,8 @@ textarea {
 
 /* MOBILE */
 @media (max-width: 550px) {
-  .form, .desc {
-    width: 100% !important;
+  .form, .desc, .textarea {
+    width: 90% !important;
   }
   .themed {
     width: 88vw;
