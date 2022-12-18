@@ -8,8 +8,8 @@ export async function load({ url }) {
         return { error: true }
     }
 
-    const startDate = '2022-12-18'
-    const endDate = '2022-12-25'
+    const startDate = '2022-12-19'
+    const endDate = '2022-12-26'
     const today = new Date().toISOString().split('T')[0]
     const isBefore = isBeforeDate(today, startDate)
     const isAfter = isAfterDate(today, endDate)

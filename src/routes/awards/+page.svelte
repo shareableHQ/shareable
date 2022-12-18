@@ -18,7 +18,7 @@
 {#if isBefore}
     <div class="buttonArea">
         <div class="dateArea hover">
-            <h2>From 18th to 25th December</h2>
+            <h2>From 19th to 26th December</h2>
         </div>
         <button disabled={!isDuring} on:click={()=>{window.location.href = '/awards/submit'}} id="submitButton" type="submit" class="toolButton redBrandButton">Join</button>
     </div>
