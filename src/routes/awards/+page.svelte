@@ -11,7 +11,7 @@
 </div>
 <p>Shareable is hosting a coding competition! From a given theme, all users are invited to create and submit their own widget or script before the closing date. After that, the winner will be announced and all submitted scripts will be published on Shareable with a special badge. No specific knowledge is required, the aim of this initiative is to have fun and create a better community!</p>
 <h2>The challenge</h2>
-<p>Given a theme, you have one week to think and write a script or a widget that matches this theme, but with all the freedom you want to extend and interpret it as you want. </p>
+<p>Given a theme, you have until the 31st of December to think and write a script or a widget that matches this theme, but with all the freedom you want to extend and interpret it as you want. </p>
 <p>The theme will be revealed as soon as the the competition has started!</p>
 
 
