@@ -18,14 +18,14 @@
 {#if isBefore}
     <div class="buttonArea">
         <div class="dateArea hover">
-            <h2>From 19th to 26th December</h2>
+            <h2>From 19th to 23th December</h2>
         </div>
         <button disabled={!isDuring} on:click={()=>{window.location.href = '/awards/submit'}} id="submitButton" type="submit" class="toolButton redBrandButton">Join</button>
     </div>
 {:else if isDuring}
 <div class="buttonArea">
     <div class="dateArea">
-        <h2>Theme is <b>Countdown</b></h2>
+        <h2>Theme is <b>Countdown</b>. Ends on 23th December</h2>
     </div>
     <button disabled={!isDuring} on:click={()=>{window.location.href = '/awards/submit?user=' + $user.id}} id="submitButton" type="submit" class="toolButton redBrandButton">Join</button>
 </div>
@@ -33,6 +33,7 @@
 <div class="dateArea">
     <h2>Competition closed!</h2>
 </div>
+<br>
 {/if}
 
 
@@ -96,5 +97,6 @@
         justify-content: space-evenly ;
         align-items: baseline;
         padding-top: 30px;
+        flex-wrap: wrap;
     }
 </style>
