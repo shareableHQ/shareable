@@ -9,7 +9,7 @@ export async function load({ url }) {
     }
 
     const startDate = '2022-12-19'
-    const endDate = '2022-12-23'
+    const endDate = '2022-12-31'
     const today = new Date().toISOString().split('T')[0]
     const isBefore = isBeforeDate(today, startDate)
     const isAfter = isAfterDate(today, endDate)
