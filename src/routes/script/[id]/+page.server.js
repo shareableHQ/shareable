@@ -34,12 +34,16 @@ export async function load({ params }) {
    if(script){
       source = marked.parse(readme)
       const $ = cheerio.load(source);
-      let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.filename}`.replace(/ /g, '%20'), '').replace('/', '')
+      let branch = script.download_url.replace(`https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}`, '').replace(`/${script.repo.filename}`.replace(/ /g, '%20'), '').replace('/', '').split('/')[0]
       $('img').each(function (i, elem) {
          console.log($(this).attr('src'), branch)
          if($(this).attr('src').indexOf('http') == -1){
-            var url = `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}/`
-            source = source.replace(`src="${$(this).attr('src')}"`, `src="${url}${$(this).attr('src')}"; style="max-width:100%"`)
+            var url = `https://raw.githubusercontent.com/${script.author_name}/${script.repo.repo_name}/${branch}`
+            if($(this).attr('src')[0] == '/'){
+               source = source.replace(`src="${$(this).attr('src')}"`, `src="${url}${$(this).attr('src')}"; style="max-width:100%"`)
+            }else{
+               source = source.replace(`src="${$(this).attr('src')}"`, `src="${url}/${$(this).attr('src')}"; style="max-width:100%"`)
+            }
          }else if($(this).attr('src').indexOf('blob') != -1){
             source = source.replace(`src="${$(this).attr('src')}"`, `src="${$(this).attr('src')}?raw=true"; style="max-width:100%"`)
          }

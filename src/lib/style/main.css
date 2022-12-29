@@ -467,6 +467,10 @@ body {
   padding-right: 10px;
 }
 
+.desc img {
+  max-width: 100%;
+}
+
 .not_found {
   opacity: 0.7;
   text-align: center;
