@@ -1,4 +1,4 @@
-# Shareable 
+# <img style="height:40px; margin-bottom:-10px; border-radius:8px" src="https://shareable.vercel.app/logo.png"> Shareable 
 ![](https://img.shields.io/website?down_message=offline&up_message=all%20services%20online&url=https%3A%2F%2Fshareable.vercel.app)
 
 ![](https://img.shields.io/github/issues/shareablehq/shareable)
