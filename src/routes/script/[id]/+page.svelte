@@ -52,9 +52,15 @@
    })
 
    async function registerDownload(){
-      const { data, error } = await supabase.rpc('increment', { row_id:id })
+      const alreadyCounted = localStorage.getItem(id);
+      if(alreadyCounted == null){
+         const { data, error } = await supabase.rpc('increment', { row_id:id })
+         script.downloads = script.downloads + 1
+         //console.log('+1')
+         localStorage.setItem(id, 'true');
+      }
       document.getElementById('invisible-download').click()
-      script.downloads = script.downloads + 1
+      
    }
    // Invoke functions
    async function invokeStar(){
