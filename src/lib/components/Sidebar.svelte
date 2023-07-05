@@ -31,7 +31,7 @@
          <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/search"><Search /> Search</a>
          {#if $user.email}
             <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/import"><PlusCircle /> Publish from GitHub</a>
-            <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/awards"><Award /> Shareable Awards</a>
+            <!-- <a on:click={(()=>{closeSidebar('load')})} class="icon" href="/awards"><Award /> Shareable Awards</a> -->
          {/if}
        </div>
 
